@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Skapa supportärende - Husqvarna Partner</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    :root {
+      --husqvarna-orange: #FF6B00;
+      --husqvarna-dark: #273A60;
+      --husqvarna-light-gray: #f5f5f5;
+      --husqvarna-gray: #BEBEBE;
+      --husqvarna-border: #E0E0E0;
+      --husqvarna-blue: #273A60;
+      --husqvarna-green: #5EC577;
+      --husqvarna-red: #E53935;
+      --husqvarna-yellow: #FFC107;
+      --husqvarna-white: #FFFFFF;
+    }
+    
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background-color: #F6F6F6;
+      margin: 0;
+      padding: 0;
+      color: var(--husqvarna-blue);
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 30px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    header {
+      background-color: white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+    
+    .page-title {
+      margin: 0 0 30px 0;
+      font-weight: 500;
+      font-size: 24px;
+      color: var(--husqvarna-blue);
+    }
+
+    .breadcrumb {
+      margin-bottom: 20px;
+      color: #666;
+    }
+
+    .breadcrumb a {
+      color: var(--husqvarna-orange);
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--husqvarna-border);
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    textarea.form-control {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .suggestions-container {
+      margin: 20px 0;
+    }
+
+    .suggestions-box {
+      background-color: #f9f9f9;
+      border: 1px solid var(--husqvarna-border);
+      border-radius: 6px;
+      padding: 15px;
+      margin-top: 10px;
+      display: none;
+    }
+
+    .suggestions-box.active {
+      display: block;
+    }
+
+    .suggestions-box h3 {
+      margin-top: 0;
+      font-weight: 500;
+      font-size: 16px;
+      color: var(--husqvarna-blue);
+      display: flex;
+      align-items: center;
+    }
+
+    .suggestions-box h3 i {
+      color: var(--husqvarna-orange);
+      margin-right: 8px;
+    }
+
+    .suggestion-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .suggestion-item {
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .suggestion-item:last-child {
+      border-bottom: none;
+    }
+
+    .suggestion-title {
+      font-weight: 500;
+      color: var(--husqvarna-blue);
+      margin-bottom: 5px;
+      cursor: pointer;
+    }
+
+    .suggestion-title:hover {
+      color: var(--husqvarna-orange);
+    }
+
+    .suggestion-desc {
+      color: #666;
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 3px 8px;
+      background-color: var(--husqvarna-light-gray);
+      border-radius: 12px;
+      font-size: 12px;
+      color: var(--husqvarna-blue);
+      margin-right: 5px;
+      margin-bottom: 5px;
+    }
+
+    .file-upload {
+      margin-bottom: 20px;
+    }
+
+    .file-upload-box {
+      border: 2px dashed var(--husqvarna-border);
+      border-radius: 6px;
+      padding: 25px;
+      text-align: center;
+      margin-top: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .file-upload-box:hover {
+      border-color: var(--husqvarna-orange);
+      background-color: rgba(255, 107, 0, 0.03);
+    }
+
+    .file-upload-box i {
+      font-size: 30px;
+      color: var(--husqvarna-gray);
+      margin-bottom: 10px;
+    }
+
+    .file-upload input[type="file"] {
+      display: none;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 25px;
+      border-radius: 6px;
+      font-weight: 500;
+      font-size: 14px;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background-color: var(--husqvarna-orange);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: #E65C00;
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      border: 1px solid var(--husqvarna-border);
+      color: var(--husqvarna-blue);
+      margin-right: 15px;
+    }
+
+    .btn-outline:hover {
+      background-color: var(--husqvarna-light-gray);
+    }
+
+    .demo-button {
+      background-color: var(--husqvarna-green);
+      color: white;
+      margin: 10px 0;
+    }
+
+    footer {
+      background-color: var(--husqvarna-dark);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 30px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px;
+        margin: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <a href="../index.html">
+        <img src="https://portal.husqvarnagroup.com/static/b2b/assets/with-name.e34798d1.svg" alt="Husqvarna">
+      </a>
+    </div>
+    <nav>
+      <a href="dashboard.html" style="text-decoration: none; color: var(--husqvarna-dark); margin-left: 20px;">Tillbaka till Kundportal</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="../index.html">Hem</a> &gt; 
+      <a href="dashboard.html">Kundportal</a> &gt; 
+      Skapa supportärende
+    </div>
+
+    <h1 class="page-title">Skapa nytt supportärende</h1>
+
+    <form id="supportForm">
+      <div class="form-group">
+        <label for="caseType">Ärendetyp *</label>
+        <select class="form-control" id="caseType" required>
+          <option value="">Välj ärendetyp</option>
+          <option value="product-issue">Produktproblem</option>
+          <option value="warranty">Garantifråga</option>
+          <option value="spare-parts">Reservdelar</option>
+          <option value="order-support">Orderrelaterade frågor</option>
+          <option value="technical-support">Teknisk support</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="caseTitle">Ärenderubrik *</label>
+        <input type="text" class="form-control" id="caseTitle" placeholder="Kort beskrivning av ärendet" required>
+      </div>
+
+      <div class="form-group">
+        <label for="caseDescription">Detaljerad beskrivning *</label>
+        <textarea class="form-control" id="caseDescription" placeholder="Beskriv ditt ärende så detaljerat som möjligt..." required></textarea>
+      </div>
+
+      <div class="suggestions-container">
+        <button type="button" id="showSuggestions" class="btn demo-button">Visa möjliga lösningar</button>
+        
+        <div class="suggestions-box" id="suggestionBox">
+          <h3><i class="fas fa-lightbulb"></i> Förslag på lösningar</h3>
+          <ul class="suggestion-list" id="suggestionList">
+            <!-- Suggestions will be dynamically added here -->
+          </ul>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="productCategory">Produktkategori</label>
+        <select class="form-control" id="productCategory">
+          <option value="">Välj produktkategori</option>
+          <option value="chainsaw">Motorsåg</option>
+          <option value="trimmer">Trimmer</option>
+          <option value="lawn-mower">Gräsklippare</option>
+          <option value="robotic-mower">Robotgräsklippare</option>
+          <option value="hedge-trimmer">Häcksax</option>
+          <option value="blower">Lövblås</option>
+          <option value="other">Annan</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="productModel">Produktmodell</label>
+        <input type="text" class="form-control" id="productModel" placeholder="T.ex. Automower 315X">
+      </div>
+
+      <div class="form-group file-upload">
+        <label>Bilder/Dokument (valfritt)</label>
+        <label for="fileUpload" class="file-upload-box">
+          <i class="fas fa-cloud-upload-alt"></i>
+          <p>Klicka för att ladda upp filer</p>
+        </label>
+        <input type="file" id="fileUpload" multiple accept=".jpg,.jpeg,.png,.pdf">
+      </div>
+
+      <div class="form-group">
+        <label for="contactEmail">E-postadress *</label>
+        <input type="email" class="form-control" id="contactEmail" placeholder="din.email@exempel.se" required>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Skicka ärende</button>
+      </div>
+    </form>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Husqvarna Group. Alla rättigheter förbehållna.</p>
+  </footer>
+
+  <script>
+    // Sample knowledge base for auto-suggestions
+    const knowledgeBase = [
+      {
+        keywords: ['automower', 'laddning', 'batteri', 'laddar inte', 'laddstation'],
+        title: 'Automower laddningsproblem - Felsökningsguide',
+        description: 'Vanliga lösningar för Automower som inte laddar korrekt eller har problem med laddstationen.',
+        link: '../help-center/guides/automower-charging.html',
+        tags: ['Automower', 'Batteri', 'Laddning']
+      },
+      {
+        keywords: ['motorsåg', 'startar inte', 'bensin', 'tändstift', 'startsnöre'],
+        title: 'Felsökning för motorsåg som inte startar',
+        description: 'Lär dig hur du löser vanliga startproblem med din motorsåg.',
+        link: '../help-center/guides/chainsaw-start.html',
+        tags: ['Motorsåg', 'Startproblem', 'Tändstift']
+      },
+      {
+        keywords: ['garanti', 'reklamation', 'garantianspråk'],
+        title: 'Hur du gör ett garantianspråk',
+        description: 'Steg-för-steg guide för hur du effektivt gör ett garantianspråk.',
+        link: '../help-center/warranty-claims.html',
+        tags: ['Garanti', 'Reklamation']
+      },
+      {
+        keywords: ['reservdelar', 'beställa', 'delar'],
+        title: 'Beställa reservdelar - Hitta rätt del',
+        description: 'Guide för att identifiera och beställa rätt reservdelar till din Husqvarna-produkt.',
+        link: '../help-center/spare-parts.html',
+        tags: ['Reservdelar', 'Beställning']
+      },
+      {
+        keywords: ['robotgräsklippare', 'automower', 'installation', 'installationsguide'],
+        title: 'Installation av Automower - Komplett guide',
+        description: 'Detaljerad guide för korrekt installation av din Automower för optimal prestanda.',
+        link: '../help-center/guides/automower-installation.html',
+        tags: ['Automower', 'Installation', 'Guide']
+      },
+      {
+        keywords: ['trimmer', 'trådmatning', 'trådhuvud', 'trimmertråd'],
+        title: 'Trimmertråd matar inte ut korrekt',
+        description: 'Lösningar när din trimmertråd inte matas ut eller fastnar.',
+        link: '../help-center/guides/trimmer-line.html',
+        tags: ['Trimmer', 'Trimmertråd', 'Felsökning']
+      }
+    ];
+
+    // Show suggestions when button is clicked
+    document.getElementById('showSuggestions').addEventListener('click', function() {
+      checkForSuggestions();
+      document.getElementById('suggestionBox').classList.add('active');
+    });
+
+    // Form submission handler
+    document.getElementById('supportForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Here you would normally send the form data to your server
+      // For this prototype, we'll just show an alert
+      
+      alert('Tack! Ditt supportärende har skickats in. Ärendenummer: SUP-' + Math.floor(10000 + Math.random() * 90000));
+      
+      // Redirect to support cases page or show success message
+      window.location.href = 'support.html';
+    });
+
+    // Function to check for suggestions based on form input
+    function checkForSuggestions() {
+      const titleText = document.getElementById('caseTitle').value.toLowerCase();
+      const descText = document.getElementById('caseDescription').value.toLowerCase();
+      const productCategory = document.getElementById('productCategory').value.toLowerCase();
+      
+      const combinedText = titleText + ' ' + descText + ' ' + productCategory;
+      
+      if (combinedText.length < 5) {
+        return;
+      }
+      
+      // Find matching suggestions from knowledge base
+      const matchedSuggestions = knowledgeBase.filter(item => {
+        return item.keywords.some(keyword => combinedText.includes(keyword.toLowerCase()));
+      });
+      
+      // Update suggestion box
+      const suggestionList = document.getElementById('suggestionList');
+      suggestionList.innerHTML = '';
+      
+      if (matchedSuggestions.length > 0) {
+        matchedSuggestions.forEach(suggestion => {
+          const li = document.createElement('li');
+          li.className = 'suggestion-item';
+          
+          // Create suggestion content
+          let tagsHTML = '';
+          suggestion.tags.forEach(tag => {
+            tagsHTML += `<span class="tag">${tag}</span>`;
+          });
+          
+          li.innerHTML = `
+            <div class="suggestion-title">${suggestion.title}</div>
+            <p class="suggestion-desc">${suggestion.description}</p>
+            <div>${tagsHTML}</div>
+            <a href="${suggestion.link}" target="_blank" style="color: var(--husqvarna-orange); display: block; margin-top: 8px;">Läs mer &rarr;</a>
+          `;
+          
+          suggestionList.appendChild(li);
+        });
+      } else {
+        suggestionList.innerHTML = '<p>Inga matchande lösningar hittades. Vänligen fyll i mer information eller fortsätt med att skicka in ditt ärende.</p>';
+      }
+    }
+
+    // Check for suggestions when typing in title or description
+    document.getElementById('caseTitle').addEventListener('input', function() {
+      if (this.value.length > 3 && document.getElementById('suggestionBox').classList.contains('active')) {
+        checkForSuggestions();
+      }
+    });
+
+    document.getElementById('caseDescription').addEventListener('input', function() {
+      if (this.value.length > 3 && document.getElementById('suggestionBox').classList.contains('active')) {
+        checkForSuggestions();
+      }
+    });
+
+    document.getElementById('productCategory').addEventListener('change', function() {
+      if (document.getElementById('suggestionBox').classList.contains('active')) {
+        checkForSuggestions();
+      }
+    });
+  </script>
+</body>
+</html>

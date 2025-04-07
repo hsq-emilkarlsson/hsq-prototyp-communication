@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Husqvarna Partner Dashboard</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <div class="logo-container">
+        <img src="https://portal.husqvarnagroup.com/static/b2b/assets/with-name.e34798d1.svg" alt="Husqvarna" class="logo">
+      </div>
+      <ul class="nav-menu">
+        <li><a href="dashboard.html" class="active">Dashboard</a></li>
+        <li><a href="active-cases.html">Active Support Cases</a></li>
+        <li><a href="notifications.html">Notifications</a></li>
+        <li><a href="settings.html">Settings</a></li>
+      </ul>
+    </aside>
+    
+    <main class="main-content">
+      <header class="dashboard-header">
+        <h1 class="page-title">Partner Dashboard</h1>
+        <div class="user-menu">
+          <div class="user-avatar">
+            <!-- User avatar SVG or image -->
+          </div>
+          <div class="user-info">
+            <span class="user-name">John Doe</span>
+            <span class="user-role">Partner</span>
+          </div>
+        </div>
+      </header>
+      
+      <section class="dashboard-cards">
+        <div class="card">
+          <div class="card-icon orange">
+            <!-- Icon SVG -->
+          </div>
+          <div class="card-content">
+            <h3>Active Cases</h3>
+            <p class="stat">5</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-icon blue">
+            <!-- Icon SVG -->
+          </div>
+          <div class="card-content">
+            <h3>Resolved Cases</h3>
+            <p class="stat">20</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-icon green">
+            <!-- Icon SVG -->
+          </div>
+          <div class="card-content">
+            <h3>Pending Cases</h3>
+            <p class="stat">3</p>
+          </div>
+        </div>
+      </section>
+      
+      <section class="news-feed">
+        <h2>Latest Updates</h2>
+        <div class="news-item">
+          <p>New features added to the dashboard.</p>
+        </div>
+        <div class="news-item">
+          <p>Maintenance scheduled for next week.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
