@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Husqvarna Kommunikationsprototyp</title>
+  <style>
+    :root {
+      --husqvarna-orange: #FF6B00;
+      --husqvarna-dark: #141414;
+      --husqvarna-light-gray: #f5f5f5;
+      --husqvarna-gray: #BEBEBE;
+      --husqvarna-border: #E0E0E0;
+      --husqvarna-blue: #007AC9;
+    }
+    
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background-color: var(--husqvarna-light-gray);
+      margin: 0;
+      padding: 0;
+      color: var(--husqvarna-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .hero {
+      background-color: var(--husqvarna-dark);
+      padding: 80px 20px;
+      color: white;
+      text-align: center;
+    }
+    
+    .hero h1 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-weight: 500;
+      font-size: 36px;
+    }
+    
+    .hero p {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 20px;
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+    
+    .logo {
+      height: 80px;
+      margin-bottom: 30px;
+    }
+    
+    .container {
+      background-color: #fff;
+      max-width: 1000px;
+      margin: -60px auto 60px;
+      padding: 50px;
+      border-radius: 4px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      position: relative;
+      flex-grow: 1;
+    }
+    
+    h2 {
+      font-weight: 500;
+      color: var(--husqvarna-dark);
+      margin-top: 0;
+      margin-bottom: 30px;
+    }
+    
+    .card {
+      border: 1px solid var(--husqvarna-border);
+      border-radius: 8px;
+      padding: 30px;
+      margin-bottom: 30px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    }
+    
+    .card h3 {
+      margin-top: 0;
+      font-weight: 500;
+      margin-bottom: 15px;
+    }
+    
+    .card p {
+      color: #666;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+    
+    .flow-selector {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 50px;
+    }
+    
+    .flow-card {
+      flex: 1;
+      text-align: center;
+      max-width: 400px;
+      border: 1px solid var(--husqvarna-border);
+      border-radius: 8px;
+      padding: 30px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .flow-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    }
+    
+    .flow-icon {
+      width: 80px;
+      height: 80px;
+      background-color: var(--husqvarna-light-gray);
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .flow-icon svg {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .flow-card.internal .flow-icon svg {
+      fill: var(--husqvarna-orange);
+    }
+    
+    .flow-card.external .flow-icon svg {
+      fill: var(--husqvarna-blue);
+    }
+    
+    .flow-card h3 {
+      margin-top: 0;
+      margin-bottom: 15px;
+    }
+    
+    .flow-card p {
+      color: #666;
+      margin-bottom: 25px;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 12px 25px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background-color 0.2s;
+      color: white;
+    }
+    
+    .btn-internal {
+      background-color: var(--husqvarna-orange);
+    }
+    
+    .btn-internal:hover {
+      background-color: #E05E00;
+    }
+    
+    .btn-external {
+      background-color: var(--husqvarna-blue);
+    }
+    
+    .btn-external:hover {
+      background-color: #0062A3;
+    }
+    
+    .about-section {
+      background-color: var(--husqvarna-light-gray);
+      padding: 30px;
+      border-radius: 8px;
+      margin-top: 50px;
+    }
+    
+    .about-section h2 {
+      margin-top: 0;
+    }
+    
+    .about-section p {
+      line-height: 1.6;
+    }
+    
+    footer {
+      background-color: var(--husqvarna-dark);
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 14px;
+      margin-top: auto;
+    }
+    
+    footer a {
+      color: var(--husqvarna-orange);
+      text-decoration: none;
+    }
+    
+    footer a:hover {
+      text-decoration: underline;
+    }
+    
+    @media (max-width: 768px) {
+      .flow-selector {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .flow-card {
+        width: 100%;
+        max-width: none;
+        margin-bottom: 20px;
+      }
+      
+      .container {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <img src="https://portal.husqvarnagroup.com/static/b2b/assets/with-name.e34798d1.svg" alt="Husqvarna" class="logo">
+    <h1>B2B Kommunikationsprototyp</h1>
+    <p>En demonstration av möjligheter för anpassad notishantering i Husqvarnas ekosystem</p>
+  </div>
+  
+  <div class="container">
+    <h2>Välj flöde</h2>
+    
+    <div class="flow-selector">
+      <div class="flow-card external">
+        <div class="flow-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM6 8a6 6 0 1 1 12 0A6 6 0 0 1 6 8zm2 10a3 3 0 0 0-3 3 1 1 0 1 1-2 0 5 5 0 0 1 5-5h8a5 5 0 0 1 5 5 1 1 0 1 1-2 0 3 3 0 0 0-3-3H8z"/>
+          </svg>
+        </div>
+        <h3>Kundflöde</h3>
+        <p>Utforska hur B2B-kunder kan anpassa och hantera sina kommunikationspreferenser för att få viktig information från Husqvarna.</p>
+        <a href="customer.html" class="btn btn-external">Gå till Kundvy</a>
+      </div>
+      
+      <div class="flow-card internal">
+        <div class="flow-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19.4 8.8c.2.6.2 1.2.2 1.6 0 4.6-3.8 8.2-8.4 8.2-1.5 0-2.9-.4-4.1-1.1l-4.7 1.5 1.5-4.5C3.3 13.3 3 12 3 10.6 3 5.9 6.8 2.2 11.4 2.2c1.5 0 2.9.4 4.1 1.1l.2.1c2.1 1.2 3.5 3.3 3.7 5.4zM5.7 16.9l-.1-.1-.7 2 1.9-.6zM11.2 4c-3.8 0-6.8 3-6.8 6.6 0 1.2.3 2.4 1 3.5l.1.1c.2.4.6 1 1 1.4l.1.2-.5 1.4.1-.1 1.5-.5.2.1c1 .5 2.1.8 3.3.8 3.7 0 6.7-3 6.7-6.6 0-.6-.1-1.3-.3-1.9H17.4c-1.8 0-3.3-1.4-3.4-3.1V4.1C13.1 4 12.2 4 11.2 4z"/>
+          </svg>
+        </div>
+        <h3>Internt Adminflöde</h3>
+        <p>Se hur Husqvarnas interna team kan skapa, hantera och följa upp kommunikation med partners och kunder i olika kanaler.</p>
+        <a href="admin.html" class="btn btn-internal">Gå till Admin</a>
+      </div>
+    </div>
+    
+    <div class="card">
+      <h3>Se Meddelandeexempel</h3>
+      <p>Utforska hur meddelanden visas i olika kommunikationskanaler, inklusive mejl, SMS, Teams och Husqvarnas portaler.</p>
+      <a href="examples.html" class="btn btn-external">Se meddelandeexempel</a>
+    </div>
+    
+    <div class="about-section">
+      <h2>Om prototypen</h2>
+      <p>Denna prototyp visar ett koncept för hur Husqvarnas B2B-kommunikation kan struktureras och anpassas för olika mottagare och kanaler. Prototypen fokuserar på:</p>
+      <ul>
+        <li>Kundanpassning av meddelandepreferenser</li>
+        <li>Multikanalskommunikation (e-post, SMS, Teams, portaler m.m.)</li>
+        <li>Admingränssnitt för meddelandehantering</li>
+        <li>Analysmöjligheter för kommunikationseffektivitet</li>
+      </ul>
+      <p>Detta är en konceptuell prototyp skapad för att demonstrera användargränssnittet och funktionell design.</p>
+    </div>
+  </div>
+  
+  <footer>
+    <p>&copy; 2025 Husqvarna Group. Alla rättigheter förbehållna. | <a href="#">Integritetspolicy</a> | <a href="#">Kontakta oss</a></p>
+  </footer>
+</body>
+</html>

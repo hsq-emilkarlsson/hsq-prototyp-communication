@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Husqvarna B2B Notiser - Dashboard</title>
+  <style>
+    :root {
+      --husqvarna-orange: #FF6B00;
+      --husqvarna-dark: #141414;
+      --husqvarna-light-gray: #f5f5f5;
+      --husqvarna-gray: #BEBEBE;
+      --husqvarna-border: #E0E0E0;
+      --husqvarna-blue: #007AC9;
+    }
+    
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background-color: var(--husqvarna-light-gray);
+      margin: 0;
+      padding: 20px;
+      color: var(--husqvarna-dark);
+    }
+    
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 4px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    header {
+      border-bottom: 1px solid var(--husqvarna-border);
+      padding-bottom: 20px;
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      height: 60px;
+    }
+    
+    h1, h2 {
+      font-weight: 500;
+      color: var(--husqvarna-dark);
+    }
+    
+    h1 {
+      margin: 0;
+    }
+    
+    .stats {
+      display: flex;
+      justify-content: space-between;
+      margin: 30px 0;
+    }
+    
+    .stat {
+      text-align: center;
+      padding: 20px;
+      background-color: var(--husqvarna-light-gray);
+      border-radius: 4px;
+      flex: 1;
+      margin: 0 10px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    
+    .stat:first-child {
+      margin-left: 0;
+    }
+    
+    .stat:last-child {
+      margin-right: 0;
+    }
+    
+    .stat h2 {
+      margin: 0;
+      color: var(--husqvarna-orange);
+      font-size: 36px;
+      font-weight: 500;
+    }
+    
+    .stat p {
+      margin: 8px 0 0;
+      color: var(--husqvarna-dark);
+      font-size: 14px;
+    }
+    
+    .card {
+      background-color: #fff;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 4px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    
+    table, th, td {
+      border: 1px solid var(--husqvarna-border);
+    }
+    
+    th, td {
+      padding: 12px 15px;
+      text-align: left;
+    }
+    
+    th {
+      background-color: var(--husqvarna-light-gray);
+      font-weight: 500;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #fafafa;
+    }
+    
+    tr:hover {
+      background-color: #f0f0f0;
+    }
+    
+    .btn-new {
+      background-color: var(--husqvarna-orange);
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      font-weight: 500;
+      text-decoration: none;
+      display: inline-block;
+      transition: background-color 0.2s;
+    }
+    
+    .btn-new:hover {
+      background-color: #E05E00;
+      text-decoration: none;
+    }
+    
+    .channel-tag {
+      display: inline-block;
+      background-color: var(--husqvarna-light-gray);
+      padding: 3px 8px;
+      border-radius: 3px;
+      font-size: 12px;
+      margin-right: 4px;
+      margin-bottom: 4px;
+    }
+    
+    .nav {
+      text-align: center;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid var(--husqvarna-border);
+    }
+    
+    .nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    
+    .nav-internal {
+      color: var(--husqvarna-orange);
+    }
+    
+    .nav-external {
+      color: var(--husqvarna-blue);
+    }
+    
+    .nav a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="https://portal.husqvarnagroup.com/static/b2b/assets/with-name.e34798d1.svg" alt="Husqvarna" class="logo">
+      <h1>Kommunikation Dashboard</h1>
+      <a href="admin.html" class="btn-new">Skapa nytt meddelande</a>
+    </header>
+    
+    <div class="stats">
+      <div class="stat">
+        <h2>50</h2>
+        <p>Meddelanden skickade</p>
+      </div>
+      <div class="stat">
+        <h2>1200</h2>
+        <p>Totala mottagare</p>
+      </div>
+      <div class="stat">
+        <h2>67%</h2>
+        <p>Läsfrekvens</p>
+      </div>
+      <div class="stat">
+        <h2>800</h2>
+        <p>Läsningar</p>
+      </div>
+    </div>
+    
+    <div class="card">
+      <h2>Meddelandehistorik</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Titel</th>
+            <th>Kategori</th>
+            <th>Kanaler</th>
+            <th>Skickat Datum</th>
+            <th>Mottagare</th>
+            <th>Läsningar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Systemuppdatering</td>
+            <td>System</td>
+            <td>
+              <span class="channel-tag">E-post</span>
+              <span class="channel-tag">SMS</span>
+            </td>
+            <td>2025-03-30</td>
+            <td>300</td>
+            <td>250</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Nyhetsbrev</td>
+            <td>Nyheter</td>
+            <td>
+              <span class="channel-tag">Webnotiser</span>
+              <span class="channel-tag">Slack</span>
+            </td>
+            <td>2025-03-28</td>
+            <td>450</td>
+            <td>320</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Garantiuppdatering</td>
+            <td>Garanti</td>
+            <td>
+              <span class="channel-tag">Teams</span>
+              <span class="channel-tag">E-post</span>
+            </td>
+            <td>2025-03-25</td>
+            <td>200</td>
+            <td>180</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Recall 2025-A</td>
+            <td>Recalls</td>
+            <td>
+              <span class="channel-tag">E-post</span>
+              <span class="channel-tag">SMS</span>
+              <span class="channel-tag">Teams</span>
+            </td>
+            <td>2025-03-20</td>
+            <td>1200</td>
+            <td>950</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="nav">
+      <a href="admin.html" class="nav-internal">Till Admin Panel</a>
+      <a href="customer.html" class="nav-external">Till Kundvy</a>
+      <a href="examples.html" class="nav-external">Se meddelandeexempel</a>
+    </div>
+  </div>
+</body>
+</html>

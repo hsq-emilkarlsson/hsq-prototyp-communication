@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Husqvarna B2B Notiser</title>
+  <style>
+    :root {
+      --husqvarna-orange: #FF6B00;
+      --husqvarna-dark: #141414;
+      --husqvarna-light-gray: #f5f5f5;
+      --husqvarna-gray: #BEBEBE;
+      --husqvarna-border: #E0E0E0;
+      --husqvarna-blue: #007AC9;
+    }
+    
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background-color: var(--husqvarna-light-gray);
+      margin: 0;
+      padding: 0;
+      color: var(--husqvarna-dark);
+    }
+    
+    .hero {
+      background-color: var(--husqvarna-dark);
+      padding: 60px 20px;
+      color: white;
+      text-align: center;
+    }
+    
+    .hero h1 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-weight: 500;
+      font-size: 32px;
+    }
+    
+    .hero p {
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 18px;
+      line-height: 1.5;
+    }
+    
+    .logo {
+      height: 70px; /* Increased from 50px */
+      margin-bottom: 30px;
+    }
+    
+    .container {
+      background-color: #fff;
+      max-width: 800px;
+      margin: -40px auto 40px;
+      padding: 40px;
+      border-radius: 4px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    
+    h2 {
+      font-weight: 500;
+      color: var(--husqvarna-dark);
+      margin-top: 0;
+    }
+    
+    fieldset {
+      border: 1px solid var(--husqvarna-border);
+      border-radius: 4px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+    
+    legend {
+      padding: 0 10px;
+      font-weight: 500;
+    }
+    
+    .option {
+      margin-bottom: 15px;
+    }
+    
+    label {
+      margin-left: 10px;
+      color: var(--husqvarna-dark);
+    }
+    
+    input[type="checkbox"],
+    input[type="radio"] {
+      cursor: pointer;
+    }
+    
+    button.submit {
+      background-color: var(--husqvarna-blue); /* Changed to blue for external */
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background-color 0.2s;
+    }
+    
+    button.submit:hover {
+      background-color: #0062A3; /* Darker blue for hover */
+    }
+    
+    .button-container {
+      text-align: center;
+    }
+    
+    .benefits {
+      display: flex;
+      margin: 40px 0;
+      justify-content: space-between;
+    }
+    
+    .benefit {
+      flex: 1;
+      padding: 0 15px;
+      text-align: center;
+    }
+    
+    .benefit-icon {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 15px;
+      border-radius: 50%;
+      background-color: var(--husqvarna-light-gray);
+    }
+    
+    .benefit-icon svg {
+      width: 30px;
+      height: 30px;
+      fill: var(--husqvarna-orange);
+    }
+    
+    .benefit h3 {
+      margin-top: 0;
+      color: var(--husqvarna-dark);
+      font-weight: 500;
+    }
+    
+    .benefit p {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.5;
+    }
+    
+    footer {
+      background-color: var(--husqvarna-dark);
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 14px;
+    }
+    
+    footer a {
+      color: var(--husqvarna-orange);
+      text-decoration: none;
+    }
+    
+    footer a:hover {
+      text-decoration: underline;
+    }
+    
+    .nav {
+      text-align: center;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid var(--husqvarna-border);
+    }
+    
+    .nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    
+    .nav-internal {
+      color: var(--husqvarna-orange);
+    }
+    
+    .nav-external {
+      color: var(--husqvarna-blue);
+    }
+    
+    .nav a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <img src="https://portal.husqvarnagroup.com/static/b2b/assets/with-name.e34798d1.svg" alt="Husqvarna" class="logo">
+    <h1>B2B Kommunikationsplattform</h1>
+    <p>Anpassa dina notifieringar från Husqvarna för att få relevant information på rätt sätt, direkt till dig.</p>
+  </div>
+  
+  <div class="container">
+    <h2>Anpassa dina notiser</h2>
+    <p>Välj vilken typ av information du vill ta emot och hur du vill få den levererad. Du kan ändra dina val när som helst.</p>
+    
+    <form action="#" method="post">
+      <!-- Informationskategorier -->
+      <fieldset>
+        <legend>Välj informationskategorier</legend>
+        <div class="option">
+          <input type="checkbox" id="system" name="information" value="system">
+          <label for="system">System Notiser - Uppdateringar om Husqvarnas digitala system och plattformar</label>
+        </div>
+        <div class="option">
+          <input type="checkbox" id="servicebulletin" name="information" value="servicebulletin">
+          <label for="servicebulletin">Servicebulletiner - Viktig serviceinformation om produkter</label>
+        </div>
+        <div class="option">
+          <input type="checkbox" id="recall" name="information" value="recall">
+          <label for="recall">Recalls - Kritisk säkerhetsinformation om produkter</label>
+        </div>
+        <div class="option">
+          <input type="checkbox" id="repair" name="information" value="repair">
+          <label for="repair">Reparationsguider - Nya eller uppdaterade reparationsinstruktioner</label>
+        </div>
+        <div class="option">
+          <input type="checkbox" id="news" name="information" value="news">
+          <label for="news">Nyheter - Produktlanseringar och företagsuppdateringar</label>
+        </div>
+        <div class="option">
+          <input type="checkbox" id="warranty" name="information" value="warranty">
+          <label for="warranty">Garantiåtgärder - Information om ändringar i garantivillkor</label>
+        </div>
+      </fieldset>
+      
+      <!-- Leveranssätt -->
+      <fieldset>
+        <legend>Välj leveranssätt</legend>
+        <div class="option">
+          <input type="radio" id="email" name="delivery" value="email" checked>
+          <label for="email">E-post - Få alla notiser direkt till din inkorg</label>
+        </div>
+        <div class="option">
+          <input type="radio" id="sms" name="delivery" value="sms">
+          <label for="sms">SMS - Korta notiser till din mobiltelefon</label>
+        </div>
+        <div class="option">
+          <input type="radio" id="web" name="delivery" value="web">
+          <label for="web">Webnotiser - Notiser direkt i din webbläsare</label>
+        </div>
+        <div class="option">
+          <input type="radio" id="teams" name="delivery" value="teams">
+          <label for="teams">Microsoft Teams - Få notiser i ditt företags Team</label>
+        </div>
+        <div class="option">
+          <input type="radio" id="whatsapp" name="delivery" value="whatsapp">
+          <label for="whatsapp">WhatsApp - Få notiser via WhatsApp</label>
+        </div>
+        <div class="option">
+          <input type="radio" id="slack" name="delivery" value="slack">
+          <label for="slack">Slack - Få notiser i din Slack-kanal</label>
+        </div>
+      </fieldset>
+      
+      <!-- Skicka-knapp -->
+      <div class="button-container">
+        <button type="submit" class="submit">Spara Inställningar</button>
+      </div>
+    </form>
+    
+    <div class="benefits">
+      <div class="benefit">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-9a1 1 0 0 1 1 1v4a1 1 0 0 1-2 0v-4a1 1 0 0 1 1-1zm0-4a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+          </svg>
+        </div>
+        <h3>Relevant Information</h3>
+        <p>Få endast den information som är viktig för just dig och ditt företag.</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 4.58V4c0-1.1.9-2 2-2h2a2 2 0 0 1 2 2v.58a8 8 0 0 1 1.92 1.11l.5-.29a2 2 0 0 1 2.74.73l1 1.74a2 2 0 0 1-.73 2.73l-.5.29a8.06 8.06 0 0 1 0 2.22l.5.3a2 2 0 0 1 .73 2.72l-1 1.74a2 2 0 0 1-2.73.73l-.5-.3A8 8 0 0 1 15 19.43V20a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2v-.58a8 8 0 0 1-1.92-1.11l-.5.29a2 2 0 0 1-2.74-.73l-1-1.74a2 2 0 0 1 .73-2.73l.5-.29a8.06 8.06 0 0 1 0-2.22l-.5-.3a2 2 0 0 1-.73-2.72l1-1.74a2 2 0 0 1 2.73-.73l.5.3A8 8 0 0 1 9 4.57zM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/>
+          </svg>
+        </div>
+        <h3>Flexibel Leverans</h3>
+        <p>Välj hur du vill få notiser - via e-post, SMS eller ditt företags kommunikationskanal.</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm1-8.41l2.54 2.53a1 1 0 0 1-1.42 1.42L11.3 12.7A1 1 0 0 1 11 12V8a1 1 0 0 1 2 0v3.59z"/>
+          </svg>
+        </div>
+        <h3>Säker Kommunikation</h3>
+        <p>All kommunikation är krypterad och följer Husqvarnas höga säkerhetsstandard.</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="nav">
+    <a href="examples.html" class="nav-external">Se exempel på meddelanden</a>
+    <a href="admin.html" class="nav-internal">Till Admin Panel</a>
+  </div>
+  
+  <footer>
+    <p>&copy; 2025 Husqvarna Group. Alla rättigheter förbehållna. | <a href="#">Integritetspolicy</a> | <a href="#">Kontakta oss</a></p>
+  </footer>
+</body>
+</html>
