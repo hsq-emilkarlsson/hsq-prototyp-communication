@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Husqvarna System Status</title>
+  <style>
+    :root {
+      --husqvarna-orange: #FF6B00;
+      --husqvarna-dark: #273A60;
+      --husqvarna-light-gray: #f5f5f5;
+      --husqvarna-gray: #BEBEBE;
+      --husqvarna-border: #E0E0E0;
+      --husqvarna-blue: #007AC9;
+      --husqvarna-green: #00A651;
+      --husqvarna-red: #DC0A0A;
+      --husqvarna-yellow: #FFC72C;
+    }
+    
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background-color: var(--husqvarna-light-gray);
+      margin: 0;
+      padding: 0;
+      color: var(--husqvarna-dark);
+    }
+    
+    .hero {
+      background-color: var(--husqvarna-dark);
+      padding: 60px 20px;
+      color: white;
+      text-align: center;
+    }
+    
+    .hero h1 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-weight: 500;
+      font-size: 32px;
+    }
+    
+    .hero p {
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 18px;
+      line-height: 1.5;
+    }
+    
+    .logo {
+      height: 70px;
+      margin-bottom: 30px;
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: -40px auto 40px;
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 4px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    
+    h2 {
+      font-weight: 500;
+      color: var(--husqvarna-dark);
+      margin-top: 0;
+      margin-bottom: 30px;
+    }
+    
+    .status-summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: var(--husqvarna-light-gray);
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+    }
+    
+    .status-indicator {
+      display: flex;
+      align-items: center;
+    }
+    
+    .status-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+    
+    .status-dot.operational {
+      background-color: var(--husqvarna-green);
+    }
+    
+    .status-dot.degraded {
+      background-color: var(--husqvarna-yellow);
+    }
+    
+    .status-dot.outage {
+      background-color: var(--husqvarna-red);
+    }
+    
+    .status-text {
+      font-weight: 500;
+      font-size: 18px;
+    }
+    
+    .timestamp {
+      color: #777;
+      font-size: 14px;
+    }
+    
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .service-card {
+      border: 1px solid var(--husqvarna-border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    .service-header {
+      padding: 15px;
+      border-bottom: 1px solid var(--husqvarna-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .service-name {
+      font-weight: 500;
+      margin: 0;
+    }
+    
+    .service-status {
+      display: flex;
+      align-items: center;
+    }
+    
+    .status-indicator-small {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+    
+    .service-details {
+      padding: 15px;
+    }
+    
+    .service-details p {
+      margin: 0 0 10px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    
+    .incident-card {
+      border-left: 4px solid var(--husqvarna-orange);
+      padding: 20px;
+      margin-bottom: 20px;
+      background-color: #FFF9F5;
+      border-radius: 0 4px 4px 0;
+    }
+    
+    .incident-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 15px;
+    }
+    
+    .incident-title {
+      margin: 0;
+      font-weight: 500;
+      font-size: 18px;
+    }
+    
+    .incident-meta {
+      text-align: right;
+    }
+    
+    .incident-time {
+      font-size: 14px;
+      color: #777;
+    }
+    
+    .incident-status {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+      color: white;
+      margin-top: 5px;
+    }
+    
+    .incident-status.investigating {
+      background-color: var(--husqvarna-orange);
+    }
+    
+    .incident-status.identified {
+      background-color: var(--husqvarna-yellow);
+    }
+    
+    .incident-status.monitoring {
+      background-color: var(--husqvarna-blue);
+    }
+    
+    .incident-status.resolved {
+      background-color: var(--husqvarna-green);
+    }
+    
+    .incident-description {
+      margin: 0 0 15px;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    
+    .incident-updates {
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px solid var(--husqvarna-border);
+    }
+    
+    .update {
+      margin-bottom: 15px;
+      position: relative;
+      padding-left: 20px;
+    }
+    
+    .update:last-child {
+      margin-bottom: 0;
+    }
+    
+    .update:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--husqvarna-gray);
+    }
+    
+    .update-time {
+      font-size: 12px;
+      color: #777;
+    }
+    
+    .update-content {
+      font-size: 14px;
+      margin: 5px 0 0;
+    }
+    
+    .maintenance-card {
+      border-left: 4px solid var(--husqvarna-blue);
+      padding: 20px;
+      margin-bottom: 20px;
+      background-color: #F5FAFF;
+      border-radius: 0 4px 4px 0;
+    }
+    
+    .nav {
+      text-align: center;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid var(--husqvarna-border);
+    }
+    
+    .nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    
+    .nav-internal {
+      color: var(--husqvarna-orange);
+    }
+    
+    .nav-external {
+      color: var(--husqvarna-blue);
+    }
+    
+    .nav a:hover {
+      text-decoration: underline;
+    }
+    
+    .subscribe-bar {
+      background-color: var(--husqvarna-light-gray);
+      padding: 20px;
+      text-align: center;
+      border-radius: 8px;
+      margin: 30px 0;
+    }
+    
+    .subscribe-bar p {
+      margin: 0 0 15px;
+      font-weight: 500;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: var(--husqvarna-blue);
+      color: white;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background-color 0.2s;
+    }
+    
+    .btn:hover {
+      background-color: #0062A3;
+    }
+    
+    footer {
+      background-color: var(--husqvarna-dark);
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 14px;
+    }
+    
+    footer a {
+      color: var(--husqvarna-orange);
+      text-decoration: none;
+    }
+    
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <img src="https://portal.husqvarnagroup.com/static/b2b/assets/with-name.e34798d1.svg" alt="Husqvarna" class="logo">
+    <h1>System Status</h1>
+    <p>Aktuell statusinformation om alla Husqvarnas B2B-system och tjänster</p>
+  </div>
+  
+  <div class="container">
+    <div class="status-summary">
+      <div class="status-indicator">
+        <div class="status-dot degraded"></div>
+        <div class="status-text">Delvis driftstörning</div>
+      </div>
+      <div class="timestamp">Senast uppdaterad: 7 april, 2025 14:35</div>
+    </div>
+    
+    <h2>Tjänsteöversikt</h2>
+    
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-header">
+          <h3 class="service-name">Partner Portal</h3>
+          <div class="service-status">
+            <div class="status-indicator-small operational"></div>
+            <span>Operativ</span>
+          </div>
+        </div>
+        <div class="service-details">
+          <p>Partner Portal fungerar normalt.</p>
+        </div>
+      </div>
+      
+      <div class="service-card">
+        <div class="service-header">
+          <h3 class="service-name">Order API</h3>
+          <div class="service-status">
+            <div class="status-indicator-small degraded"></div>
+            <span>Långsam</span>
+          </div>
+        </div>
+        <div class="service-details">
+          <p>Vi upplever långsammare svarstider än normalt. Tekniker arbetar på problemet.</p>
+        </div>
+      </div>
+      
+      <div class="service-card">
+        <div class="service-header">
+          <h3 class="service-name">Service Hub</h3>
+          <div class="service-status">
+            <div class="status-indicator-small operational"></div>
+            <span>Operativ</span>
+          </div>
+        </div>
+        <div class="service-details">
+          <p>Service Hub fungerar normalt.</p>
+        </div>
+      </div>
+      
+      <div class="service-card">
+        <div class="service-header">
+          <h3 class="service-name">Inventory System</h3>
+          <div class="service-status">
+            <div class="status-indicator-small operational"></div>
+            <span>Operativ</span>
+          </div>
+        </div>
+        <div class="service-details">
+          <p>Inventory System fungerar normalt.</p>
+        </div>
+      </div>
+      
+      <div class="service-card">
+        <div class="service-header">
+          <h3 class="service-name">Dealer Locator</h3>
+          <div class="service-status">
+            <div class="status-indicator-small operational"></div>
+            <span>Operativ</span>
+          </div>
+        </div>
+        <div class="service-details">
+          <p>Dealer Locator fungerar normalt.</p>
+        </div>
+      </div>
+      
+      <div class="service-card">
+        <div class="service-header">
+          <h3 class="service-name">Product API</h3>
+          <div class="service-status">
+            <div class="status-indicator-small outage"></div>
+            <span>Nere</span>
+          </div>
+        </div>
+        <div class="service-details">
+          <p>Product API är för närvarande inte tillgängligt. Tekniker arbetar på att åtgärda problemet.</p>
+        </div>
+      </div>
+    </div>
+    
+    <h2>Aktiva incidenter</h2>
+    
+    <div class="incident-card">
+      <div class="incident-header">
+        <h3 class="incident-title">Problem med Product API</h3>
+        <div class="incident-meta">
+          <div class="incident-time">Startad: 7 april, 2025 13:22</div>
+          <div class="incident-status investigating">Undersöks</div>
+        </div>
+      </div>
+      <div class="incident-description">
+        <p>Vi upplever ett avbrott i Product API-tjänsten som påverkar produktvisningar i Partner Portal och B2B-webbutik. Vårt team undersöker problemet och arbetar på en lösning.</p>
+      </div>
+      <div class="incident-updates">
+        <div class="update">
+          <div class="update-time">7 april, 2025 14:35</div>
+          <p class="update-content">Vi har identifierat orsaken till problemet och arbetar på en lösning. Beräknad åtgärdstid är cirka 1-2 timmar.</p>
+        </div>
+        <div class="update">
+          <div class="update-time">7 april, 2025 13:45</div>
+          <p class="update-content">Vi har bekräftat att avbrottet påverkar alla användare och att det beror på ett databasrelaterat problem. Tekniker arbetar för högtryck med att återställa funktionaliteten.</p>
+        </div>
+        <div class="update">
+          <div class="update-time">7 april, 2025 13:22</div>
+          <p class="update-content">Vi undersöker ett avbrott i Product API-tjänsten. Mer information kommer att tillhandahållas så snart den blir tillgänglig.</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="incident-card">
+      <div class="incident-header">
+        <h3 class="incident-title">Långsamma svarstider i Order API</h3>
+        <div class="incident-meta">
+          <div class="incident-time">Startad: 7 april, 2025 10:15</div>
+          <div class="incident-status identified">Identifierad</div>
+        </div>
+      </div>
+      <div class="incident-description">
+        <p>Order API upplever långsammare svarstider än normalt, vilket kan påverka orderläggning och -hantering. Tekniker har identifierat problemet och arbetar på en lösning.</p>
+      </div>
+      <div class="incident-updates">
+        <div class="update">
+          <div class="update-time">7 april, 2025 14:20</div>
+          <p class="update-content">Vi har implementerat en tillfällig lösning som bör minska svarstiderna. Vi fortsätter arbeta på en permanent lösning.</p>
+        </div>
+        <div class="update">
+          <div class="update-time">7 april, 2025 12:10</div>
+          <p class="update-content">Rotorsaken har identifierats som en prestandaflaskhals i databaslagret. Vi arbetar på en lösning.</p>
+        </div>
+        <div class="update">
+          <div class="update-time">7 april, 2025 10:15</div>
+          <p class="update-content">Vi undersöker rapporter om långsamma svarstider i Order API.</p>
+        </div>
+      </div>
+    </div>
+    
+    <h2>Planerat underhåll</h2>
+    
+    <div class="maintenance-card">
+      <div class="incident-header">
+        <h3 class="incident-title">Systemuppgradering av Partner Portal</h3>
+        <div class="incident-meta">
+          <div class="incident-time">Planerad: 10 april, 2025 22:00 - 11 april, 02:00</div>
+          <div class="incident-status monitoring" style="background-color: var(--husqvarna-blue);">Planerad</div>
+        </div>
+      </div>
+      <div class="incident-description">
+        <p>Partner Portal kommer att vara otillgänglig under ett planerat underhållsfönster för att uppgradera systemet till senaste version med nya funktioner och säkerhetsförbättringar.</p>
+        <p>Fördelar med uppgraderingen:</p>
+        <ul>
+          <li>Förbättrad orderhantering</li>
+          <li>Snabbare produktsökning</li>
+          <li>Nya rapporteringsverktyg</li>
+          <li>Förbättrad säkerhet</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="subscribe-bar">
+      <p>Få meddelanden om systemstatus direkt till din e-post eller mobiltelefon</p>
+      <a href="customer.html" class="btn">Hantera dina notispreferences</a>
+    </div>
+    
+    <div class="nav">
+      <a href="index.html" class="nav-external">Tillbaka till startsidan</a>
+      <a href="customer.html" class="nav-external">Kommunikationsinställningar</a>
+    </div>
+  </div>
+  
+  <footer>
+    <p>&copy; 2025 Husqvarna Group. Alla rättigheter förbehållna. | <a href="#">Integritetspolicy</a> | <a href="#">Kontakta oss</a></p>
+  </footer>
+</body>
+</html>
