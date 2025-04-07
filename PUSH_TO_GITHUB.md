@@ -36,10 +36,8 @@ git commit -m "Initial commit - Husqvarna kommunikationsprototyp"
 Om du inte redan har gjort detta:
 
 ```bash
-git remote add origin https://github.com/ditt-användarnamn/hsq-prototyp-communication.git
+git remote add origin https://github.com/hsq-emilkarlsson/hsq-prototyp-communication.git
 ```
-
-Ersätt `ditt-användarnamn` med ditt GitHub-användarnamn.
 
 ## 7. Pusha till GitHub
 
@@ -62,7 +60,7 @@ git push
 5. Välj "main" som branch och "/" (root) som mapp
 6. Klicka på "Save"
 7. Efter några minuter kommer din webbplats att vara tillgänglig på:
-   `https://ditt-användarnamn.github.io/hsq-prototyp-communication/`
+   `https://hsq-emilkarlsson.github.io/hsq-prototyp-communication/`
 
 ## Klart!
 
