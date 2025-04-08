@@ -16,6 +16,19 @@
       --husqvarna-white: #FFFFFF;
     }
     
+    /* Concept banner */
+    .concept-banner {
+      background-color: #FFC107;
+      color: #333;
+      text-align: center;
+      padding: 10px;
+      font-weight: bold;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
     body {
       font-family: 'Helvetica Neue', Arial, sans-serif;
       background-color: #F6F6F6; /* Updated background color outside the menu */
@@ -196,10 +209,32 @@
       height: 16px;
       margin-right: 8px;
     }
+
+    .btn {
+      background-color: var(--husqvarna-orange);
+      color: white;
+      padding: 8px 15px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+      display: inline-block;
+      margin-top: 12px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    
+    .btn:hover {
+      background-color: #e55d00;
+    }
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
+  <div class="concept-banner">
+    Detta är en konceptversion och är inte fullt fungerande eller i produktion.
+  </div>
   <div class="dashboard-container">
     <div class="sidebar">
       <div class="logo-container">
@@ -263,6 +298,19 @@
             <h3>Notifikationsinställningar</h3>
             <p>Anpassa dina notifikationer baserat på din roll.</p>
             <a href="preferences.html" class="btn">Hantera Inställningar</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-content">
+            <h3>Effektivisera Avtalsadministration</h3>
+            <p>Digitalisera och förenkla er avtalshantering.</p>
+            <ul style="margin-top: 10px; padding-left: 20px; font-size: 14px; color: #555;">
+              <li>Reducerade administrativa kostnader</li>
+              <li>Snabbare hanteringstid</li>
+              <li>Förbättrad spårbarhet</li>
+              <li>Automatisk förnyelse</li>
+            </ul>
+            <a href="avtal.html" class="btn">Utforska Lösningar</a>
           </div>
         </div>
       </div>

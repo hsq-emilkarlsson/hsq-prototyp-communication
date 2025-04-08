@@ -15,6 +15,19 @@
       --husqvarna-green: #5EC577;
     }
 
+    /* Concept banner */
+    .concept-banner {
+      background-color: #FFC107;
+      color: #333;
+      text-align: center;
+      padding: 10px;
+      font-weight: bold;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
     body {
       font-family: 'Helvetica Neue', Arial, sans-serif;
       background-color: var(--husqvarna-light-gray);
@@ -129,12 +142,16 @@
 
     .btn {
       display: inline-block;
-      padding: 12px 25px;
-      border-radius: 4px;
+      padding: 15px 30px;
+      border-radius: 6px;
       text-decoration: none;
       font-weight: 500;
       transition: background-color 0.2s;
       color: white;
+      font-size: 16px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
     }
 
     .btn-internal {
@@ -143,6 +160,8 @@
 
     .btn-internal:hover {
       background-color: #E05E00;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
     }
 
     .btn-external {
@@ -151,6 +170,8 @@
 
     .btn-external:hover {
       background-color: #1A294C;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
     }
 
     footer {
@@ -234,6 +255,12 @@
       padding: 15px;
       border-radius: 6px;
       border-left: 3px solid var(--husqvarna-orange);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .feature-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
 
     .feature-item h4 {
@@ -249,9 +276,27 @@
       font-size: 14px;
       color: #666;
     }
+
+    .call-to-action {
+      background-color: rgba(255, 107, 0, 0.1);
+      padding: 20px;
+      margin: 20px 0 40px;
+      border-radius: 8px;
+      text-align: center;
+      border: 1px dashed var(--husqvarna-orange);
+    }
+
+    .call-to-action h3 {
+      margin-top: 0;
+      color: var(--husqvarna-dark);
+      font-size: 20px;
+    }
   </style>
 </head>
 <body>
+  <div class="concept-banner">
+    Detta är en konceptversion och är inte fullt fungerande eller i produktion.
+  </div>
   <div class="hero">
     <img src="https://portal.husqvarnagroup.com/static/b2b/assets/with-name.e34798d1.svg" alt="Husqvarna" class="logo">
     <h1>B2B Kommunikationsprototyp</h1>
@@ -291,10 +336,19 @@
           <h4>Teknisk dokumentation</h4>
           <p>Detaljerade manualer och sprängskisser för servicetekniker</p>
         </div>
+        <div class="feature-item">
+          <h4>Avtalshantering</h4>
+          <p>Effektiv hantering och signering av avtal och överenskommelser mellan partner och Husqvarna</p>
+        </div>
       </div>
     </div>
     
     <p>Genom att testa denna prototyp hjälper du oss att utvärdera och förfina lösningen för att möta verkliga behov i vår B2B-verksamhet. Ett särskilt fokus ligger på att <span class="highlight">förbättra arbetsflödet för reparatörer</span> genom att tillhandahålla detaljerade, interaktiva reparationsguider som kan minska servicetiden och öka kvaliteten.</p>
+  </div>
+
+  <div class="call-to-action">
+    <h3>Testa prototypen nu!</h3>
+    <p>Välj ett av flödena nedan för att utforska och testa de olika funktionerna i plattformen.</p>
   </div>
 
   <div class="container">

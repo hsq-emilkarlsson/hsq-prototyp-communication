@@ -452,6 +452,19 @@
       color: var(--husqvarna-orange);
     }
     
+    /* Concept banner */
+    .concept-banner {
+      background-color: #FFC107;
+      color: #333;
+      text-align: center;
+      padding: 10px;
+      font-weight: bold;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
     /* Responsive */
     @media (max-width: 768px) {
       .dashboard-container {
@@ -487,6 +500,9 @@
   </style>
 </head>
 <body>
+  <div class="concept-banner">
+    Detta är en konceptversion och är inte fullt fungerande eller i produktion.
+  </div>
   <!-- Exempel-notis banner -->
   <div style="background-color: #FFC107; color: #333; text-align: center; padding: 10px; font-weight: bold;">
     Detta är en exempelsida för demonstrationsändamål
