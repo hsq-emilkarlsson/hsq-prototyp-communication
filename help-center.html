@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Husqvarna Reparationsguider</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    :root {
+      --husqvarna-orange: #FF6B00;
+      --husqvarna-dark: #273A60;
+      --husqvarna-light-gray: #f5f5f5;
+      --husqvarna-gray: #BEBEBE;
+      --husqvarna-border: #E0E0E0;
+      --husqvarna-blue: #273A60;
+      --husqvarna-green: #5EC577;
+      --husqvarna-red: #E53935;
+      --husqvarna-yellow: #FFC107;
+      --husqvarna-white: #FFFFFF;
+    }
+    
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background-color: #F6F6F6;
+      margin: 0;
+      padding: 0;
+      color: var(--husqvarna-blue);
+    }
+    
+    .dashboard-container {
+      display: flex;
+      min-height: 100vh;
+    }
+    
+    .sidebar {
+      width: 250px;
+      background-color: var(--husqvarna-white);
+      color: var(--husqvarna-blue);
+      padding-top: 20px;
+      flex-shrink: 0;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+      z-index: 10;
+    }
+    
+    .logo-container {
+      padding: 0 20px 20px;
+      border-bottom: 1px solid var(--husqvarna-border);
+      margin-bottom: 20px;
+    }
+    
+    .logo {
+      max-width: 100%;
+      height: 60px;
+    }
+    
+    .nav-menu {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .nav-menu li {
+      margin-bottom: 5px;
+    }
+    
+    .nav-menu a {
+      display: flex;
+      align-items: center;
+      padding: 12px 20px;
+      color: var(--husqvarna-blue);
+      text-decoration: none;
+      transition: all 0.2s;
+      border-left: 4px solid transparent;
+    }
+    
+    .nav-menu a:hover {
+      background-color: var(--husqvarna-light-gray);
+      color: var(--husqvarna-blue);
+    }
+    
+    .nav-menu a.active {
+      background-color: var(--husqvarna-light-gray);
+      color: var(--husqvarna-blue);
+      border-left: 4px solid var(--husqvarna-orange);
+      font-weight: 500;
+    }
+    
+    .main-content {
+      flex-grow: 1;
+      padding: 30px;
+    }
+    
+    .page-header {
+      margin-bottom: 30px;
+    }
+    
+    .page-title {
+      margin: 0;
+      font-weight: 500;
+      font-size: 24px;
+      color: var(--husqvarna-dark);
+    }
+    
+    .page-subtitle {
+      margin-top: 10px;
+      font-size: 16px;
+      color: #666;
+    }
+    
+    .search-container {
+      margin-bottom: 30px;
+    }
+    
+    .search-bar {
+      position: relative;
+      max-width: 500px;
+    }
+    
+    .search-input {
+      width: 100%;
+      padding: 12px 15px 12px 40px;
+      border: 1px solid var(--husqvarna-border);
+      border-radius: 6px;
+      font-size: 14px;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    
+    .search-input:focus {
+      outline: none;
+      border-color: var(--husqvarna-orange);
+      box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.1);
+    }
+    
+    .search-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #999;
+    }
+    
+    .category-section {
+      margin-bottom: 50px;
+    }
+    
+    .section-header {
+      margin-bottom: 20px;
+    }
+    
+    .section-title {
+      font-size: 20px;
+      font-weight: 500;
+      margin: 0 0 8px;
+      color: var(--husqvarna-dark);
+    }
+    
+    .section-subtitle {
+      font-size: 16px;
+      color: #666;
+      margin: 0;
+    }
+    
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+    }
+    
+    .category-card {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .category-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .category-image {
+      height: 120px;
+      background-color: var(--husqvarna-light-gray);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .category-image img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: cover;
+    }
+    
+    .category-image i {
+      font-size: 48px;
+      color: var(--husqvarna-orange);
+    }
+    
+    .category-content {
+      padding: 15px;
+    }
+    
+    .category-title {
+      font-size: 16px;
+      font-weight: 500;
+      margin: 0 0 5px;
+    }
+    
+    .category-count {
+      font-size: 14px;
+      color: #777;
+    }
+    
+    .guide-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    
+    .guide-card {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .guide-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .guide-image {
+      height: 160px;
+      background-color: var(--husqvarna-light-gray);
+      position: relative;
+    }
+    
+    .guide-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .guide-category {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      padding: 5px 10px;
+      background-color: var(--husqvarna-dark);
+      color: white;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    
+    .guide-content {
+      padding: 15px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .guide-title {
+      font-size: 16px;
+      font-weight: 500;
+      margin: 0 0 10px;
+    }
+    
+    .guide-meta {
+      display: flex;
+      align-items: center;
+      font-size: 13px;
+      color: #777;
+      margin-top: auto;
+    }
+    
+    .guide-difficulty {
+      display: flex;
+      align-items: center;
+      margin-right: 15px;
+    }
+    
+    .guide-difficulty-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--husqvarna-green);
+      margin-right: 5px;
+    }
+    
+    .guide-difficulty-medium .guide-difficulty-dot {
+      background-color: var(--husqvarna-yellow);
+    }
+    
+    .guide-difficulty-hard .guide-difficulty-dot {
+      background-color: var(--husqvarna-red);
+    }
+    
+    .guide-time {
+      display: flex;
+      align-items: center;
+    }
+    
+    .guide-time i {
+      margin-right: 5px;
+      font-size: 14px;
+    }
+    
+    .view-all-link {
+      display: inline-block;
+      margin-top: 20px;
+      color: var(--husqvarna-orange);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    
+    .view-all-link:hover {
+      text-decoration: underline;
+    }
+    
+    /* Concept banner */
+    .concept-banner {
+      background-color: #FFC107;
+      color: #333;
+      text-align: center;
+      padding: 10px;
+      font-weight: bold;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .dashboard-container {
+        flex-direction: column;
+      }
+      
+      .sidebar {
+        width: 100%;
+        order: 2;
+      }
+      
+      .main-content {
+        order: 1;
+        padding: 20px;
+      }
+      
+      .category-grid, .guide-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="concept-banner">
+    Detta är en konceptversion och är inte fullt fungerande eller i produktion.
+  </div>
+  <div class="dashboard-container">
+    <div class="sidebar">
+      <div class="logo-container">
+        <img src="https://portal.husqvarnagroup.com/static/b2b/assets/with-name.e34798d1.svg" alt="Husqvarna" class="logo">
+      </div>
+      <ul class="nav-menu">
+        <li><a href="index.html"><i class="fas fa-home" style="margin-right: 12px;"></i> Överblick</a></li>
+        <li><a href="customer-dashboard.html"><i class="fas fa-bell" style="margin-right: 12px;"></i> Meddelanden</a></li>
+        <li><a href="customer-dashboard.html"><i class="fas fa-headset" style="margin-right: 12px;"></i> Support</a></li>
+        <li><a href="#" class="active"><i class="fas fa-tools" style="margin-right: 12px;"></i> Reparationsguider</a></li>
+        <li><a href="customer-dashboard.html"><i class="fas fa-cog" style="margin-right: 12px;"></i> Inställningar</a></li>
+      </ul>
+    </div>
+    
+    <div class="main-content">
+      <div class="page-header">
+        <h1 class="page-title">Reparationsguider</h1>
+        <p class="page-subtitle">Hitta professionell hjälp för att reparera och underhålla dina Husqvarna-produkter</p>
+      </div>
+      
+      <div class="search-container">
+        <div class="search-bar">
+          <i class="fas fa-search search-icon"></i>
+          <input type="text" class="search-input" placeholder="Sök efter reparationsguider, produkter eller problem...">
+        </div>
+      </div>
+      
+      <!-- Product Categories -->
+      <div class="category-section">
+        <div class="section-header">
+          <h2 class="section-title">Utforska efter produktkategori</h2>
+          <p class="section-subtitle">Välj din produktkategori för att hitta rätt reparationsguide</p>
+        </div>
+        <div class="category-grid">
+          <a href="#" class="category-card">
+            <div class="category-image" style="display: flex; align-items: center; justify-content: center; height: 100px; background-color: #f8f8f8;">
+              <i class="fas fa-leaf fa-3x" style="color: var(--husqvarna-orange);"></i>
+            </div>
+            <div class="category-content">
+              <h3 class="category-title">Gräsklippare</h3>
+              <p class="category-count">86 guider</p>
+            </div>
+          </a>
+          
+          <a href="#" class="category-card">
+            <div class="category-image" style="display: flex; align-items: center; justify-content: center; height: 100px; background-color: #f8f8f8;">
+              <i class="fas fa-tree fa-3x" style="color: var(--husqvarna-orange);"></i>
+            </div>
+            <div class="category-content">
+              <h3 class="category-title">Motorsågar</h3>
+              <p class="category-count">124 guider</p>
+            </div>
+          </a>
+          
+          <a href="#" class="category-card">
+            <div class="category-image" style="display: flex; align-items: center; justify-content: center; height: 100px; background-color: #f8f8f8;">
+              <i class="fas fa-cut fa-3x" style="color: var(--husqvarna-orange);"></i>
+            </div>
+            <div class="category-content">
+              <h3 class="category-title">Trimmer</h3>
+              <p class="category-count">45 guider</p>
+            </div>
+          </a>
+          
+          <a href="#" class="category-card">
+            <div class="category-image" style="display: flex; align-items: center; justify-content: center; height: 100px; background-color: #f8f8f8;">
+              <i class="fas fa-robot fa-3x" style="color: var(--husqvarna-orange);"></i>
+            </div>
+            <div class="category-content">
+              <h3 class="category-title">Robotgräsklippare</h3>
+              <p class="category-count">72 guider</p>
+            </div>
+          </a>
+          
+          <a href="#" class="category-card">
+            <div class="category-image" style="display: flex; align-items: center; justify-content: center; height: 100px; background-color: #f8f8f8;">
+              <i class="fas fa-wind fa-3x" style="color: var(--husqvarna-orange);"></i>
+            </div>
+            <div class="category-content">
+              <h3 class="category-title">Lövblås</h3>
+              <p class="category-count">38 guider</p>
+            </div>
+          </a>
+          
+          <a href="#" class="category-card">
+            <div class="category-image" style="display: flex; align-items: center; justify-content: center; height: 100px; background-color: #f8f8f8;">
+              <i class="fas fa-seedling fa-3x" style="color: var(--husqvarna-orange);"></i>
+            </div>
+            <div class="category-content">
+              <h3 class="category-title">Häcksax</h3>
+              <p class="category-count">52 guider</p>
+            </div>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Popular Repair Guides -->
+      <div class="category-section">
+        <div class="section-header">
+          <h2 class="section-title">Populära reparationsguider</h2>
+          <p class="section-subtitle">Steg för steg-instruktioner från våra experter</p>
+        </div>
+        <div class="guide-grid">
+          <a href="#" class="guide-card">
+            <div class="guide-image" style="display: flex; align-items: center; justify-content: center; height: 120px; background-color: #f8f8f8;">
+              <i class="fas fa-cut fa-3x" style="color: var(--husqvarna-orange);"></i>
+              <span class="guide-category" style="position: absolute; top: 10px; left: 10px;">Gräsklippare</span>
+            </div>
+            <div class="guide-content">
+              <h3 class="guide-title">Byta kniv på Husqvarna LC353V</h3>
+              <div class="guide-meta">
+                <div class="guide-difficulty guide-difficulty-easy">
+                  <span class="guide-difficulty-dot"></span>
+                  <span>Lätt</span>
+                </div>
+                <div class="guide-time">
+                  <i class="fas fa-clock"></i>
+                  <span>30 minuter</span>
+                </div>
+              </div>
+            </div>
+          </a>
+          
+          <a href="#" class="guide-card">
+            <div class="guide-image" style="display: flex; align-items: center; justify-content: center; height: 120px; background-color: #f8f8f8;">
+              <i class="fas fa-cogs fa-3x" style="color: var(--husqvarna-orange);"></i>
+              <span class="guide-category" style="position: absolute; top: 10px; left: 10px;">Motorsåg</span>
+            </div>
+            <div class="guide-content">
+              <h3 class="guide-title">Byte av förgasare på Husqvarna 445</h3>
+              <div class="guide-meta">
+                <div class="guide-difficulty guide-difficulty-medium">
+                  <span class="guide-difficulty-dot"></span>
+                  <span>Medium</span>
+                </div>
+                <div class="guide-time">
+                  <i class="fas fa-clock"></i>
+                  <span>45 minuter</span>
+                </div>
+              </div>
+            </div>
+          </a>
+          
+          <a href="#" class="guide-card">
+            <div class="guide-image" style="display: flex; align-items: center; justify-content: center; height: 120px; background-color: #f8f8f8;">
+              <i class="fas fa-leaf fa-3x" style="color: var(--husqvarna-orange);"></i>
+              <span class="guide-category" style="position: absolute; top: 10px; left: 10px;">Trimmer</span>
+            </div>
+            <div class="guide-content">
+              <h3 class="guide-title">Rengöra luftfilter på Husqvarna 128R</h3>
+              <div class="guide-meta">
+                <div class="guide-difficulty guide-difficulty-easy">
+                  <span class="guide-difficulty-dot"></span>
+                  <span>Lätt</span>
+                </div>
+                <div class="guide-time">
+                  <i class="fas fa-clock"></i>
+                  <span>15 minuter</span>
+                </div>
+              </div>
+            </div>
+          </a>
+          
+          <a href="#" class="guide-card">
+            <div class="guide-image" style="display: flex; align-items: center; justify-content: center; height: 120px; background-color: #f8f8f8;">
+              <i class="fas fa-robot fa-3x" style="color: var(--husqvarna-orange);"></i>
+              <span class="guide-category" style="position: absolute; top: 10px; left: 10px;">Robotgräsklippare</span>
+            </div>
+            <div class="guide-content">
+              <h3 class="guide-title">Byta batteri på Automower 315X</h3>
+              <div class="guide-meta">
+                <div class="guide-difficulty guide-difficulty-medium">
+                  <span class="guide-difficulty-dot"></span>
+                  <span>Medium</span>
+                </div>
+                <div class="guide-time">
+                  <i class="fas fa-clock"></i>
+                  <span>35 minuter</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        
+        <a href="#" class="view-all-link">Visa alla reparationsguider →</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
