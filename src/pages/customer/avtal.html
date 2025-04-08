@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Husqvarna Partner - Avtal</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    :root {
+      --husqvarna-orange: #FF6B00;
+      --husqvarna-dark: #273A60;
+      --husqvarna-light-gray: #f5f5f5;
+      --husqvarna-gray: #BEBEBE;
+      --husqvarna-border: #E0E0E0;
+      --husqvarna-blue: #273A60;
+      --husqvarna-green: #5EC577;
+      --husqvarna-red: #E53935;
+      --husqvarna-yellow: #FFC107;
+      --husqvarna-white: #FFFFFF;
+    }
+    
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background-color: #F6F6F6;
+      margin: 0;
+      padding: 0;
+      color: var(--husqvarna-blue);
+    }
+    
+    .dashboard-container {
+      display: flex;
+      min-height: 100vh;
+    }
+    
+    .sidebar {
+      width: 250px;
+      background-color: var(--husqvarna-white);
+      color: var(--husqvarna-blue);
+      padding-top: 20px;
+      flex-shrink: 0;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+      z-index: 10;
+    }
+    
+    .logo-container {
+      padding: 0 20px 20px;
+      border-bottom: 1px solid var(--husqvarna-border);
+      margin-bottom: 20px;
+    }
+    
+    .logo {
+      max-width: 100%;
+      height: 60px;
+    }
+    
+    .nav-menu {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .nav-menu li {
+      margin-bottom: 5px;
+    }
+    
+    .nav-menu a {
+      display: flex;
+      align-items: center;
+      padding: 12px 20px;
+      color: var(--husqvarna-blue);
+      text-decoration: none;
+      transition: all 0.2s;
+      border-left: 4px solid transparent;
+    }
+    
+    .nav-menu a:hover {
+      background-color: var(--husqvarna-light-gray);
+      color: var(--husqvarna-blue);
+    }
+    
+    .nav-menu a.active {
+      background-color: var(--husqvarna-light-gray);
+      color: var(--husqvarna-blue);
+      border-left: 4px solid var(--husqvarna-orange);
+      font-weight: 500;
+    }
+    
+    .main-content {
+      flex-grow: 1;
+      padding: 30px;
+    }
+    
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    
+    .page-title {
+      margin: 0;
+      font-weight: 500;
+      font-size: 24px;
+    }
+
+    /* Avtal specific styles */
+    .agreements-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 25px;
+    }
+    
+    .agreements-section {
+      background-color: var(--husqvarna-white);
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+    }
+    
+    .section-header {
+      padding: 15px 20px;
+      border-bottom: 1px solid var(--husqvarna-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .section-title {
+      margin: 0;
+      font-weight: 500;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .section-title i {
+      margin-right: 10px;
+      color: var(--husqvarna-orange);
+    }
+    
+    .section-content {
+      padding: 20px;
+    }
+    
+    .agreement-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .agreement-item {
+      padding: 20px;
+      border-bottom: 1px solid var(--husqvarna-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .agreement-item:last-child {
+      border-bottom: none;
+    }
+    
+    .agreement-info {
+      flex: 1;
+    }
+    
+    .agreement-name {
+      font-weight: 500;
+      font-size: 16px;
+      margin: 0 0 5px 0;
+      display: flex;
+      align-items: center;
+    }
+    
+    .agreement-name i {
+      margin-right: 10px;
+      color: var(--husqvarna-blue);
+    }
+    
+    .agreement-description {
+      color: #666;
+      font-size: 14px;
+      margin: 0 0 8px 0;
+    }
+    
+    .agreement-meta {
+      display: flex;
+      gap: 20px;
+      font-size: 13px;
+      color: #777;
+    }
+    
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      margin-left: 10px;
+    }
+    
+    .badge-signed {
+      background-color: var(--husqvarna-green);
+      color: white;
+    }
+    
+    .badge-pending {
+      background-color: var(--husqvarna-yellow);
+      color: var(--husqvarna-dark);
+    }
+    
+    .badge-expired {
+      background-color: var(--husqvarna-red);
+      color: white;
+    }
+    
+    .badge-updated {
+      background-color: var(--husqvarna-blue);
+      color: white;
+    }
+    
+    .agreement-actions {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      border: none;
+      transition: all 0.2s;
+    }
+    
+    .btn-primary {
+      background-color: var(--husqvarna-orange);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background-color: #e65c00;
+    }
+    
+    .btn-secondary {
+      background-color: var(--husqvarna-blue);
+      color: white;
+    }
+    
+    .btn-secondary:hover {
+      background-color: #1a294c;
+    }
+    
+    .btn-outline {
+      background-color: transparent;
+      border: 1px solid var(--husqvarna-border);
+      color: var(--husqvarna-blue);
+    }
+    
+    .btn-outline:hover {
+      background-color: var(--husqvarna-light-gray);
+    }
+    
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .modal-content {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 800px;
+      max-height: 80vh;
+      overflow-y: auto;
+      position: relative;
+    }
+    
+    .modal-header {
+      padding: 15px 20px;
+      border-bottom: 1px solid var(--husqvarna-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      background-color: white;
+      z-index: 2;
+    }
+    
+    .modal-title {
+      margin: 0;
+      font-weight: 500;
+      font-size: 18px;
+    }
+    
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: #999;
+    }
+    
+    .modal-body {
+      padding: 20px;
+    }
+    
+    .modal-footer {
+      padding: 15px 20px;
+      border-top: 1px solid var(--husqvarna-border);
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      position: sticky;
+      bottom: 0;
+      background-color: white;
+      z-index: 2;
+    }
+    
+    .agreement-document {
+      padding: 20px;
+      background-color: var(--husqvarna-light-gray);
+      border-radius: 4px;
+      margin-bottom: 20px;
+      white-space: pre-wrap;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 14px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    
+    .highlight {
+      background-color: rgba(255, 107, 0, 0.1);
+      border-bottom: 2px solid var(--husqvarna-orange);
+    }
+    
+    .change-history {
+      margin-top: 20px;
+      background-color: var(--husqvarna-light-gray);
+      padding: 15px;
+      border-radius: 4px;
+    }
+    
+    .change-history h4 {
+      margin: 0 0 10px 0;
+      font-size: 16px;
+    }
+    
+    .change-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .change-item {
+      padding: 8px 0;
+      border-bottom: 1px solid #e0e0e0;
+      display: flex;
+      align-items: flex-start;
+    }
+    
+    .change-item:last-child {
+      border-bottom: none;
+    }
+    
+    .change-icon {
+      margin-right: 10px;
+      color: var(--husqvarna-orange);
+    }
+    
+    .change-date {
+      font-size: 12px;
+      color: #777;
+      min-width: 100px;
+    }
+    
+    .change-description {
+      flex: 1;
+    }
+    
+    .signature-box {
+      margin-top: 20px;
+      padding: 20px;
+      border: 1px solid var(--husqvarna-border);
+      border-radius: 4px;
+      text-align: center;
+    }
+    
+    .signature-canvas {
+      border: 1px dashed #999;
+      background-color: white;
+      margin: 15px 0;
+      width: 100%;
+      height: 150px;
+      cursor: crosshair;
+    }
+    
+    .signature-actions {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    
+    @media (max-width: 768px) {
+      .dashboard-container {
+        flex-direction: column;
+      }
+      
+      .sidebar {
+        width: 100%;
+      }
+      
+      .modal-content {
+        width: 95%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <div class="sidebar">
+      <div class="logo-container">
+        <img src="https://portal.husqvarnagroup.com/static/b2b/assets/with-name.e34798d1.svg" alt="Husqvarna" class="logo">
+      </div>
+      <ul class="nav-menu">
+        <li><a href="overview.html"><i class="fas fa-home" style="margin-right: 12px;"></i> Överblick</a></li>
+        <li><a href="notifications.html"><i class="fas fa-bell" style="margin-right: 12px;"></i> Meddelanden</a></li>
+        <li><a href="support.html"><i class="fas fa-headset" style="margin-right: 12px;"></i> Support</a></li>
+        <li><a href="training.html"><i class="fas fa-graduation-cap" style="margin-right: 12px;"></i> Utbildning</a></li>
+        <li><a href="avtal.html" class="active"><i class="fas fa-file-contract" style="margin-right: 12px;"></i> Avtal</a></li>
+        <li><a href="preferences.html"><i class="fas fa-cog" style="margin-right: 12px;"></i> Inställningar</a></li>
+      </ul>
+    </div>
+    
+    <div class="main-content">
+      <div class="page-header">
+        <h1 class="page-title">Avtal</h1>
+      </div>
+
+      <div class="agreements-container">
+        <div class="agreements-section">
+          <div class="section-header">
+            <h2 class="section-title"><i class="fas fa-file-signature"></i> Avtal som kräver åtgärd</h2>
+          </div>
+          <div class="section-content">
+            <ul class="agreement-list">
+              <li class="agreement-item">
+                <div class="agreement-info">
+                  <h3 class="agreement-name"><i class="fas fa-file-contract"></i> SELLDIS <span class="badge badge-updated">Uppdaterad</span></h3>
+                  <p class="agreement-description">Återförsäljaravtal för Husqvarna-produkter (Sales and Distribution Agreement)</p>
+                  <div class="agreement-meta">
+                    <span>Utfärdat: 2025-03-15</span>
+                    <span>Giltigt t.o.m: 2026-03-15</span>
+                    <span>Referensnummer: AGR-2025-1234</span>
+                  </div>
+                </div>
+                <div class="agreement-actions">
+                  <button class="btn btn-outline" onclick="openAgreementModal('selldis')">Förhandsgranska</button>
+                  <button class="btn btn-primary" onclick="openSignModal('selldis')">Signera</button>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="agreements-section">
+          <div class="section-header">
+            <h2 class="section-title"><i class="fas fa-check-circle"></i> Aktiva avtal</h2>
+          </div>
+          <div class="section-content">
+            <ul class="agreement-list">
+              <li class="agreement-item">
+                <div class="agreement-info">
+                  <h3 class="agreement-name"><i class="fas fa-file-contract"></i> Service Partner Agreement <span class="badge badge-signed">Signerat</span></h3>
+                  <p class="agreement-description">Servicepartneravtal för reparation och service av Husqvarna-produkter</p>
+                  <div class="agreement-meta">
+                    <span>Signerat: 2025-01-10</span>
+                    <span>Giltigt t.o.m: 2027-01-10</span>
+                    <span>Referensnummer: AGR-2025-0987</span>
+                  </div>
+                </div>
+                <div class="agreement-actions">
+                  <button class="btn btn-outline" onclick="openAgreementModal('service')">Visa</button>
+                </div>
+              </li>
+              <li class="agreement-item">
+                <div class="agreement-info">
+                  <h3 class="agreement-name"><i class="fas fa-file-contract"></i> Premium Partner Avtalet <span class="badge badge-signed">Signerat</span></h3>
+                  <p class="agreement-description">Premiumpartneravtal med utökade förmåner för certifierade återförsäljare</p>
+                  <div class="agreement-meta">
+                    <span>Signerat: 2024-11-05</span>
+                    <span>Giltigt t.o.m: 2026-11-05</span>
+                    <span>Referensnummer: AGR-2024-5678</span>
+                  </div>
+                </div>
+                <div class="agreement-actions">
+                  <button class="btn btn-outline" onclick="openAgreementModal('premium')">Visa</button>
+                </div>
+              </li>
+              <li class="agreement-item">
+                <div class="agreement-info">
+                  <h3 class="agreement-name"><i class="fas fa-file-contract"></i> Marknadsföringsavtal <span class="badge badge-signed">Signerat</span></h3>
+                  <p class="agreement-description">Riktlinjer för marknadsföring och exponering av Husqvarna-produkter</p>
+                  <div class="agreement-meta">
+                    <span>Signerat: 2024-09-22</span>
+                    <span>Giltigt t.o.m: 2026-09-22</span>
+                    <span>Referensnummer: AGR-2024-3456</span>
+                  </div>
+                </div>
+                <div class="agreement-actions">
+                  <button class="btn btn-outline" onclick="openAgreementModal('marketing')">Visa</button>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="agreements-section">
+          <div class="section-header">
+            <h2 class="section-title"><i class="fas fa-history"></i> Avtalhistorik</h2>
+          </div>
+          <div class="section-content">
+            <ul class="agreement-list">
+              <li class="agreement-item">
+                <div class="agreement-info">
+                  <h3 class="agreement-name"><i class="fas fa-file-contract"></i> SELLDIS (2023 version) <span class="badge badge-expired">Ersatt</span></h3>
+                  <p class="agreement-description">Tidigare återförsäljaravtal för Husqvarna-produkter</p>
+                  <div class="agreement-meta">
+                    <span>Signerat: 2023-03-10</span>
+                    <span>Giltigt t.o.m: 2025-03-10</span>
+                    <span>Referensnummer: AGR-2023-1234</span>
+                  </div>
+                </div>
+                <div class="agreement-actions">
+                  <button class="btn btn-outline" onclick="openAgreementModal('selldis-old')">Visa</button>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Agreement Preview Modal -->
+  <div class="modal" id="agreementModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modalTitle">Avtalsförhandsvisning</h3>
+        <button class="modal-close" onclick="closeModal('agreementModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="agreement-content"></div>
+        
+        <div class="change-history" id="change-history">
+          <h4>Ändringshistorik</h4>
+          <ul class="change-list" id="change-list">
+            <!-- Changes will be populated dynamically -->
+          </ul>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeModal('agreementModal')">Stäng</button>
+        <button class="btn btn-primary" id="signButton" onclick="openSignModal(currentAgreementId)">Signera</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Signature Modal -->
+  <div class="modal" id="signatureModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Signera avtal</h3>
+        <button class="modal-close" onclick="closeModal('signatureModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>För att slutföra avtalet behöver du signera nedan. Genom att signera bekräftar du att du förstår och accepterar avtalsvillkoren.</p>
+        
+        <div class="signature-box">
+          <label for="signature">Din signatur:</label>
+          <canvas id="signature-canvas" class="signature-canvas" width="600" height="150"></canvas>
+          <div class="signature-actions">
+            <button class="btn btn-outline" onclick="clearSignature()">Rensa</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeModal('signatureModal')">Avbryt</button>
+        <button class="btn btn-primary" onclick="submitSignature()">Slutför signering</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Modal -->
+  <div class="modal" id="successModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Avtalet har signerats</h3>
+        <button class="modal-close" onclick="closeModal('successModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div style="text-align: center; padding: 20px;">
+          <i class="fas fa-check-circle" style="font-size: 60px; color: var(--husqvarna-green); margin-bottom: 20px;"></i>
+          <h3>Tack för din signatur!</h3>
+          <p>Avtalet har nu signerats och registrerats i vårt system. En kopia har skickats till din e-post för dina arkiv.</p>
+          <p>Referensnummer: <strong id="confirmation-number">AGR-CONF-12345</strong></p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" onclick="closeModal('successModal')">Stäng</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Variables
+    let currentAgreementId = '';
+    let signatureCanvas;
+    let signatureCtx;
+    let isDrawing = false;
+
+    // Sample agreement data
+    const agreements = {
+      'selldis': {
+        title: 'SELLDIS - Återförsäljaravtal',
+        content: `SELLDIS - ÅTERFÖRSÄLJARAVTAL
+HUSQVARNA AB
+
+1. PARTER OCH SYFTE
+Detta avtal ("Avtalet") ingås mellan Husqvarna AB, org.nr 556000-5484 ("Husqvarna") och återförsäljare ("Återförsäljaren").
+
+Syftet med detta avtal är att fastställa villkoren för försäljning och distribution av Husqvarnas produkter genom Återförsäljarens verksamhet.
+
+2. PRODUKT- OCH TJÄNSTEUTBUD
+2.1 Husqvarna tillhandahåller Återförsäljaren rätten att marknadsföra, sälja och distribuera Husqvarnas produkter enligt de villkor som anges i detta avtal.
+
+2.2 <span class="highlight">Återförsäljaren åtar sig att upprätthålla ett lämpligt lager av Husqvarnas produkter för att tillgodose efterfrågan på sin marknad. Minimibeställning per kvartal har justerats från 50 till 40 enheter för mindre återförsäljare.</span>
+
+2.3 <span class="highlight">Husqvarna tillhandahåller utbildning för Återförsäljarens personal för att säkerställa god produktkunskap och professionell rådgivning till slutkunder. Utbildningen sker nu helt digitalt via Husqvarnas nya e-learning plattform.</span>
+
+3. PRISER OCH BETALNINGSVILLKOR
+3.1 Priserna för Husqvarnas produkter framgår av Husqvarnas gällande prislista, vilken uppdateras regelbundet.
+
+3.2 <span class="highlight">Betalningsvillkor: 30 dagar netto från fakturadatum. För beställningar överstigande €10,000 kan förlängda betalningsvillkor om 45 dagar tillämpas efter särskild överenskommelse.</span>
+
+4. GARANTIER OCH SERVICE
+4.1 Återförsäljaren ska tillhandahålla garanti- och serviceåtaganden i enlighet med Husqvarnas garantipolicy.
+
+4.2 <span class="highlight">Garantiperioden för professionella produkter är 12 månader från försäljningsdatum till slutkund. För konsumentprodukter gäller 24 månader. För batteriprodukter i Premium-serien har garantitiden utökats till 36 månader.</span>
+
+5. AVTALSTID OCH UPPSÄGNING
+5.1 Detta avtal gäller från signeringsdatum och löper i 24 månader, med automatisk förlängning om 12 månader i taget om ingen av parterna säger upp avtalet.
+
+5.2 Uppsägningstid: 3 månader före avtalstidens utgång.
+
+6. TVISTLÖSNING
+6.1 Tvister som uppstår i samband med detta avtal ska avgöras genom skiljedom enligt reglerna för Stockholms Handelskammares Skiljedomsinstitut.
+
+för HUSQVARNA AB                   för ÅTERFÖRSÄLJAREN`,
+        changes: [
+          { date: '2025-03-15', description: 'Ändrad minimibeställning från 50 till 40 enheter för mindre återförsäljare' },
+          { date: '2025-03-15', description: 'Utbildning sker nu helt digitalt via den nya e-learning plattformen' },
+          { date: '2025-03-15', description: 'Förlängda betalningsvillkor (45 dagar) möjliga för större beställningar' },
+          { date: '2025-03-15', description: 'Utökad garanti (36 månader) för batteriprodukter i Premium-serien' }
+        ]
+      },
+      'service': {
+        title: 'Service Partner Agreement',
+        content: `SERVICE PARTNER AGREEMENT
+HUSQVARNA AB
+
+1. PARTER OCH SYFTE
+Detta avtal ingås mellan Husqvarna AB ("Husqvarna") och servicepartner ("Servicepartnern").
+
+Syftet med detta avtal är att fastställa villkoren för service, reparation och underhåll av Husqvarnas produkter genom Servicepartnern.
+
+2. SERVICEÅTAGANDE
+2.1 Servicepartnern åtar sig att tillhandahålla service, reparation och underhåll av Husqvarnas produkter enligt de standarder och riktlinjer som fastställs av Husqvarna.
+
+2.2 Servicepartnern ska ha erforderlig kompetens, utrustning och reservdelar för att utföra service på Husqvarnas produkter.
+
+3. UTBILDNING OCH CERTIFIERING
+3.1 Husqvarna tillhandahåller nödvändig utbildning för Servicepartnerns tekniker.
+
+3.2 Servicepartnern förbinder sig att hålla sina tekniker uppdaterade genom att delta i Husqvarnas utbildningsprogram.
+
+4. ERSÄTTNING OCH VILLKOR
+4.1 För garantireparationer ersätter Husqvarna Servicepartnern enligt gällande ersättningsmodell.
+
+4.2 För reparationer utanför garanti tillämpas Servicepartnerns normala prissättning.
+
+5. AVTALSTID OCH UPPSÄGNING
+5.1 Detta avtal gäller från signeringsdatum och löper i 24 månader.
+
+5.2 Avtalet förlängs automatiskt med 12 månader om ingen av parterna säger upp avtalet.
+
+6. ÖVRIGT
+6.1 Servicepartnern har rätt att använda Husqvarnas varumärke och "Auktoriserad Servicepartner"-status i sin marknadsföring enligt Husqvarnas riktlinjer.
+
+För HUSQVARNA AB                   För SERVICEPARTNERN`,
+        changes: []
+      },
+      'premium': {
+        title: 'Premium Partner Avtalet',
+        content: `PREMIUM PARTNER AVTALET
+HUSQVARNA AB
+
+1. PARTER OCH SYFTE
+Detta avtal ingås mellan Husqvarna AB ("Husqvarna") och premium partner ("Premium Partner").
+
+Syftet med detta avtal är att fastställa villkoren för ett utökat samarbete mellan Husqvarna och Premium Partner.
+
+2. PREMIUM PARTNER STATUS
+2.1 Premium Partner erhåller särskild status med utökade förmåner och skyldigheter.
+
+2.2 Premium Partner får använda "Husqvarna Premium Partner"-logotypen i sin marknadsföring.
+
+3. FÖRMÅNER
+3.1 Förlängda betalningsvillkor: 45 dagar netto från fakturadatum.
+
+3.2 Prioriterad leverans vid bristsituationer.
+
+3.3 Förbättrade marginaler enligt separat marginalstruktur.
+
+3.4 Exklusiv tillgång till limited edition-produkter.
+
+4. SKYLDIGHETER
+4.1 Premium Partner åtar sig att ha minst två certifierade säljpersonal.
+
+4.2 Premium Partner ska upprätthålla ett fullsortiment av Husqvarnas produkter.
+
+4.3 Premium Partner ska ha en dedikerad Husqvarna-avdelning i butiken.
+
+5. AVTALSTID OCH UPPSÄGNING
+5.1 Detta avtal gäller från signeringsdatum och löper i 24 månader.
+
+5.2 Avtalet förlängs automatiskt med 12 månader om ingen av parterna säger upp avtalet.
+
+För HUSQVARNA AB                   För PREMIUM PARTNER`,
+        changes: []
+      },
+      'marketing': {
+        title: 'Marknadsföringsavtal',
+        content: `MARKNADSFÖRINGSAVTAL
+HUSQVARNA AB
+
+1. PARTER OCH SYFTE
+Detta avtal ingås mellan Husqvarna AB ("Husqvarna") och partner ("Partner").
+
+Syftet med detta avtal är att fastställa riktlinjer för marknadsföring av Husqvarnas produkter.
+
+2. MARKNADSFÖRINGSMATERIAL
+2.1 Husqvarna tillhandahåller Partner med marknadsföringsmaterial för Husqvarnas produkter.
+
+2.2 Partner förbinder sig att använda materialet enligt Husqvarnas riktlinjer.
+
+3. VARUMÄRKE
+3.1 Partner får använda Husqvarnas varumärke i sin marknadsföring enligt Husqvarnas riktlinjer.
+
+3.2 All användning av Husqvarnas varumärke ska godkännas av Husqvarna innan publicering.
+
+4. MARKNADSFÖRINGSAKTIVITETER
+4.1 Partner förbinder sig att delta i Husqvarnas gemensamma marknadsföringsaktiviteter.
+
+4.2 Husqvarna bidrar med marknadsföringsstöd enligt gällande riktlinjer.
+
+5. AVTALSTID OCH UPPSÄGNING
+5.1 Detta avtal gäller från signeringsdatum och löper i 24 månader.
+
+5.2 Avtalet förlängs automatiskt med 12 månader om ingen av parterna säger upp avtalet.
+
+För HUSQVARNA AB                   För PARTNER`,
+        changes: []
+      },
+      'selldis-old': {
+        title: 'SELLDIS - Återförsäljaravtal (2023 version)',
+        content: `SELLDIS - ÅTERFÖRSÄLJARAVTAL (2023 VERSION)
+HUSQVARNA AB
+
+1. PARTER OCH SYFTE
+Detta avtal ("Avtalet") ingås mellan Husqvarna AB, org.nr 556000-5484 ("Husqvarna") och återförsäljare ("Återförsäljaren").
+
+Syftet med detta avtal är att fastställa villkoren för försäljning och distribution av Husqvarnas produkter genom Återförsäljarens verksamhet.
+
+2. PRODUKT- OCH TJÄNSTEUTBUD
+2.1 Husqvarna tillhandahåller Återförsäljaren rätten att marknadsföra, sälja och distribuera Husqvarnas produkter enligt de villkor som anges i detta avtal.
+
+2.2 Återförsäljaren åtar sig att upprätthålla ett lämpligt lager av Husqvarnas produkter för att tillgodose efterfrågan på sin marknad. Minimibeställning per kvartal är 50 enheter.
+
+2.3 Husqvarna tillhandahåller utbildning för Återförsäljarens personal för att säkerställa god produktkunskap och professionell rådgivning till slutkunder. Utbildningen sker på plats hos återförsäljaren eller vid Husqvarnas utbildningscentra.
+
+3. PRISER OCH BETALNINGSVILLKOR
+3.1 Priserna för Husqvarnas produkter framgår av Husqvarnas gällande prislista, vilken uppdateras regelbundet.
+
+3.2 Betalningsvillkor: 30 dagar netto från fakturadatum.
+
+4. GARANTIER OCH SERVICE
+4.1 Återförsäljaren ska tillhandahålla garanti- och serviceåtaganden i enlighet med Husqvarnas garantipolicy.
+
+4.2 Garantiperioden för professionella produkter är 12 månader från försäljningsdatum till slutkund. För konsumentprodukter gäller 24 månader.
+
+5. AVTALSTID OCH UPPSÄGNING
+5.1 Detta avtal gäller från signeringsdatum och löper i 24 månader, med automatisk förlängning om 12 månader i taget om ingen av parterna säger upp avtalet.
+
+5.2 Uppsägningstid: 3 månader före avtalstidens utgång.
+
+6. TVISTLÖSNING
+6.1 Tvister som uppstår i samband med detta avtal ska avgöras genom skiljedom enligt reglerna för Stockholms Handelskammares Skiljedomsinstitut.
+
+för HUSQVARNA AB                   för ÅTERFÖRSÄLJAREN`,
+        changes: []
+      }
+    };
+
+    // Initialize when document is fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // Setup signature canvas
+      signatureCanvas = document.getElementById('signature-canvas');
+      signatureCtx = signatureCanvas.getContext('2d');
+      
+      // Canvas event listeners
+      signatureCanvas.addEventListener('mousedown', startDrawing);
+      signatureCanvas.addEventListener('mousemove', draw);
+      signatureCanvas.addEventListener('mouseup', stopDrawing);
+      signatureCanvas.addEventListener('mouseout', stopDrawing);
+      
+      // Touch support
+      signatureCanvas.addEventListener('touchstart', startDrawingTouch);
+      signatureCanvas.addEventListener('touchmove', drawTouch);
+      signatureCanvas.addEventListener('touchend', stopDrawing);
+    });
+
+    // Open agreement modal
+    function openAgreementModal(agreementId) {
+      currentAgreementId = agreementId;
+      const agreement = agreements[agreementId];
+      
+      document.getElementById('modalTitle').textContent = agreement.title;
+      
+      // Create agreement content
+      let contentHtml = `<div class="agreement-document">${agreement.content}</div>`;
+      document.getElementById('agreement-content').innerHTML = contentHtml;
+      
+      // Show or hide sign button based on agreement type
+      const signButton = document.getElementById('signButton');
+      if (agreementId === 'selldis') {
+        signButton.style.display = 'block';
+      } else {
+        signButton.style.display = 'none';
+      }
+      
+      // Show or hide change history
+      const changeHistory = document.getElementById('change-history');
+      const changeList = document.getElementById('change-list');
+      
+      if (agreement.changes && agreement.changes.length > 0) {
+        changeList.innerHTML = '';
+        agreement.changes.forEach(change => {
+          const li = document.createElement('li');
+          li.className = 'change-item';
+          li.innerHTML = `
+            <span class="change-icon"><i class="fas fa-pen"></i></span>
+            <span class="change-date">${change.date}</span>
+            <span class="change-description">${change.description}</span>
+          `;
+          changeList.appendChild(li);
+        });
+        changeHistory.style.display = 'block';
+      } else {
+        changeHistory.style.display = 'none';
+      }
+      
+      // Show modal
+      document.getElementById('agreementModal').style.display = 'flex';
+    }
+
+    // Open signature modal
+    function openSignModal(agreementId) {
+      currentAgreementId = agreementId;
+      closeModal('agreementModal');
+      document.getElementById('signatureModal').style.display = 'flex';
+    }
+
+    // Close modal
+    function closeModal(modalId) {
+      document.getElementById(modalId).style.display = 'none';
+    }
+
+    // Signature handling
+    function startDrawing(e) {
+      isDrawing = true;
+      draw(e);
+    }
+
+    function draw(e) {
+      if (!isDrawing) return;
+      
+      signatureCtx.lineWidth = 2;
+      signatureCtx.lineCap = 'round';
+      signatureCtx.strokeStyle = '#000';
+      
+      signatureCtx.lineTo(
+        e.clientX - signatureCanvas.getBoundingClientRect().left,
+        e.clientY - signatureCanvas.getBoundingClientRect().top
+      );
+      signatureCtx.stroke();
+      signatureCtx.beginPath();
+      signatureCtx.moveTo(
+        e.clientX - signatureCanvas.getBoundingClientRect().left,
+        e.clientY - signatureCanvas.getBoundingClientRect().top
+      );
+    }
+
+    function startDrawingTouch(e) {
+      isDrawing = true;
+      drawTouch(e);
+      e.preventDefault();
+    }
+
+    function drawTouch(e) {
+      if (!isDrawing) return;
+      
+      const touch = e.touches[0];
+      
+      signatureCtx.lineWidth = 2;
+      signatureCtx.lineCap = 'round';
+      signatureCtx.strokeStyle = '#000';
+      
+      signatureCtx.lineTo(
+        touch.clientX - signatureCanvas.getBoundingClientRect().left,
+        touch.clientY - signatureCanvas.getBoundingClientRect().top
+      );
+      signatureCtx.stroke();
+      signatureCtx.beginPath();
+      signatureCtx.moveTo(
+        touch.clientX - signatureCanvas.getBoundingClientRect().left,
+        touch.clientY - signatureCanvas.getBoundingClientRect().top
+      );
+      
+      e.preventDefault();
+    }
+
+    function stopDrawing() {
+      isDrawing = false;
+      signatureCtx.beginPath();
+    }
+
+    function clearSignature() {
+      signatureCtx.clearRect(0, 0, signatureCanvas.width, signatureCanvas.height);
+    }
+
+    function submitSignature() {
+      // In a real app, would send signature image to server
+      
+      // Generate a random confirmation number for demo
+      const confirmationNumber = 'AGR-CONF-' + Math.floor(100000 + Math.random() * 900000);
+      document.getElementById('confirmation-number').textContent = confirmationNumber;
+      
+      // Close signature modal and show success
+      closeModal('signatureModal');
+      document.getElementById('successModal').style.display = 'flex';
+      
+      // After showing success, we would update the UI to show the agreement as signed
+      // This is a simulated version
+      setTimeout(() => {
+        // Update the SELLDIS agreement to appear as signed
+        const selldisItem = document.querySelector('.agreement-item:first-child');
+        const badge = selldisItem.querySelector('.badge');
+        badge.textContent = 'Signerat';
+        badge.className = 'badge badge-signed';
+        
+        // Remove the old agreement from history since it's now replaced
+        const historySection = document.querySelector('.agreements-section:last-child .agreement-list');
+        historySection.innerHTML = `
+          <li class="agreement-item">
+            <div class="agreement-info">
+              <h3 class="agreement-name"><i class="fas fa-file-contract"></i> SELLDIS (2023 version) <span class="badge badge-expired">Ersatt</span></h3>
+              <p class="agreement-description">Tidigare återförsäljaravtal för Husqvarna-produkter</p>
+              <div class="agreement-meta">
+                <span>Signerat: 2023-03-10</span>
+                <span>Giltigt t.o.m: 2025-03-10</span>
+                <span>Referensnummer: AGR-2023-1234</span>
+              </div>
+            </div>
+            <div class="agreement-actions">
+              <button class="btn btn-outline" onclick="openAgreementModal('selldis-old')">Visa</button>
+            </div>
+          </li>
+        `;
+        
+        // Move the signed agreement to active agreements
+        const activeSection = document.querySelector('.agreements-section:nth-child(2) .agreement-list');
+        const newActiveAgreement = document.createElement('li');
+        newActiveAgreement.className = 'agreement-item';
+        newActiveAgreement.innerHTML = `
+          <div class="agreement-info">
+            <h3 class="agreement-name"><i class="fas fa-file-contract"></i> SELLDIS <span class="badge badge-signed">Signerat</span></h3>
+            <p class="agreement-description">Återförsäljaravtal för Husqvarna-produkter (Sales and Distribution Agreement)</p>
+            <div class="agreement-meta">
+              <span>Signerat: ${new Date().toISOString().slice(0, 10)}</span>
+              <span>Giltigt t.o.m: 2027-04-07</span>
+              <span>Referensnummer: AGR-2025-1234</span>
+            </div>
+          </div>
+          <div class="agreement-actions">
+            <button class="btn btn-outline" onclick="openAgreementModal('selldis')">Visa</button>
+          </div>
+        `;
+        activeSection.insertBefore(newActiveAgreement, activeSection.firstChild);
+        
+        // Remove from agreements requiring action
+        const needActionSection = document.querySelector('.agreements-section:first-child .agreement-list');
+        needActionSection.innerHTML = '<p>Inga avtal kräver för närvarande åtgärd.</p>';
+      }, 2000);
+    }
+  </script>
+</body>
+</html>
