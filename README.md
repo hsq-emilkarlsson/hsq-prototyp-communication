@@ -2,6 +2,8 @@
 
 A modern React-based retailer portal application for Husqvarna partners with comprehensive functionality including orders, catalog, support, training, and integration management.
 
+**🌐 Live Site:** https://hsq-emilkarlsson.github.io/hsq-prototyp-communication/
+
 ## 🚀 Live Demo
 
 Visit the live application: [https://hsq-emilkarlsson.github.io/hsq-prototyp-communication/](https://hsq-emilkarlsson.github.io/hsq-prototyp-communication/)
