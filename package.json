@@ -1,93 +1,51 @@
-<!DOCTYPE html>
-<html lang="sv">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Husqvarna Partner Dashboard</title>
-  <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
-</head>
-<body>
-  <div class="dashboard-container">
-    <aside class="sidebar">
-      <div class="logo-container">
-        <img src="https://portal.husqvarnagroup.com/static/b2b/assets/with-name.e34798d1.svg" alt="Husqvarna" class="logo" style="height: 60px;"> <!-- Increased height from default -->
-      </div>
-      <ul class="nav-menu">
-        <li><a href="customer-dashboard.html" class="active">Dashboard</a></li>
-        <li><a href="active-cases.html">Active Support Cases</a></li>
-        <li><a href="notifications.html">Notifications</a></li>
-        <li><a href="reports.html">Reports</a></li>
-        <li><a href="settings.html">Settings</a></li>
-      </ul>
-    </aside>
-
-    <main class="main-content">
-      <header class="dashboard-header">
-        <h1 class="page-title">Partner Dashboard</h1>
-        <div class="user-menu">
-          <div class="user-avatar">
-            <!-- User avatar SVG or image -->
-          </div>
-          <div class="user-info">
-            <span class="user-name">John Doe</span>
-            <span class="user-role">Partner</span>
-          </div>
-        </div>
-      </header>
-
-      <section class="dashboard-section">
-        <div class="section-header">
-          <h2>Active Support Cases</h2>
-        </div>
-        <div class="section-content">
-          <table>
-            <thead>
-              <tr>
-                <th>Case ID</th>
-                <th>Title</th>
-                <th>Status</th>
-                <th>Date Created</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>001</td>
-                <td>Issue with Product A</td>
-                <td>Open</td>
-                <td>2025-03-30</td>
-                <td><a href="view-case.html">View</a> | <a href="edit-case.html">Edit</a></td>
-              </tr>
-              <tr>
-                <td>002</td>
-                <td>Request for Support</td>
-                <td>In Progress</td>
-                <td>2025-03-28</td>
-                <td><a href="view-case.html">View</a> | <a href="edit-case.html">Edit</a></td>
-              </tr>
-              <!-- More cases -->
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section class="dashboard-section">
-        <div class="section-header">
-          <h2>Recent Notifications</h2>
-        </div>
-        <div class="section-content">
-          <ul>
-            <li>Notification 1</li>
-            <li>Notification 2</li>
-            <!-- More notifications -->
-          </ul>
-        </div>
-      </section>
-
-      <div class="footer">
-        <p>&copy; 2025 Husqvarna Group. All rights reserved.</p>
-      </div>
-    </main>
-  </div>
-</body>
-</html>
+{
+  "name": "husqvarna-retailer-dashboard",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Husqvarna Retailer Dashboard - Sales, Marketing & Settings",
+  "dependencies": {
+    "@heroicons/react": "^2.0.18",
+    "@radix-ui/react-dialog": "^1.0.4",
+    "@radix-ui/react-select": "^1.2.2",
+    "@radix-ui/react-switch": "^1.0.3",
+    "@radix-ui/react-tabs": "^1.0.4",
+    "clsx": "^2.0.0",
+    "date-fns": "^2.30.0",
+    "lucide-react": "^0.263.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.15.0",
+    "recharts": "^2.8.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.10",
+    "@types/react": "^18.2.21",
+    "@types/react-dom": "^18.2.7",
+    "@vitejs/plugin-react": "^4.0.4",
+    "autoprefixer": "^10.4.21",
+    "gh-pages": "^6.0.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.2.2",
+    "vite": "^4.4.9"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "deploy": "npm run build && gh-pages -d dist"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
